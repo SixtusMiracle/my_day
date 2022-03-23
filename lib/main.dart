@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_day/screens/home.dart';
+import 'package:my_day/screens/home/home.dart';
+import 'package:my_day/shared/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: Home(),
+      initialRoute: Home.routeName,
+      routes: routes,
     );
   }
 }
