@@ -14,12 +14,10 @@ class Background extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment(0.03, 1.0),
-          end: Alignment(0.03, -0.92),
-          colors: [const Color(0xe5ffffff), const Color(0x00caebfe)],
-          stops: [0.0, 1.0],
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg_image.png'),
+          fit: BoxFit.cover,
         ),
       ),
       child: Stack(

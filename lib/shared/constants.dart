@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
 
-const miTextColor = Color(0x181743);
-const miTextBoldColor = Color(0x464569);
+const miTextColor = Color(0xFF181743);
+const miTextBoldColor = Color(0xFF464569);
