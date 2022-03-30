@@ -46,7 +46,12 @@ class Body extends StatelessWidget {
                       padding: const EdgeInsets.only(left: miDefaultSize * 0.4),
                       child: CircularGradientIcon(
                         icon: todos[0].icon,
-                        dotColorCode: todos[0].colorCode,
+                        gradientStartColor: todos[0].gradientStartColor,
+                        gradientStopColor: todos[0].gradientStopColor,
+                        beginStart: todos[0].beginStart,
+                        beginStop: todos[0].beginStop,
+                        endStart: todos[0].endStart,
+                        endStop: todos[0].endStop,
                       ),
                     ),
                   ],

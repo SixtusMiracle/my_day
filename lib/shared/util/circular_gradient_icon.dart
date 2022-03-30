@@ -5,12 +5,18 @@ import '../constants.dart';
 
 class CircularGradientIcon extends StatelessWidget {
   final String icon;
-  final int dotColorCode;
+  final int gradientStartColor, gradientStopColor;
+  final double beginStart, beginStop, endStart, endStop;
 
   const CircularGradientIcon({
     Key? key,
     required this.icon,
-    required this.dotColorCode,
+    required this.gradientStartColor,
+    required this.gradientStopColor,
+    required this.beginStart,
+    required this.beginStop,
+    required this.endStart,
+    required this.endStop,
   }) : super(key: key);
 
   @override
@@ -18,13 +24,12 @@ class CircularGradientIcon extends StatelessWidget {
     return Container(
       height: 120,
       width: 55,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.elliptical(9999, 9999)),
         gradient: LinearGradient(
-          // TODO: Generate gradient based on dotColorCode
-          colors: [Color(0xfffe1e9a), Color(0xfffea64c)],
-          begin: Alignment(1.0, -1.0),
-          end: Alignment(-0.83, 1.0),
+          colors: [Color(gradientStartColor), Color(gradientStopColor)],
+          begin: Alignment(beginStart, beginStop),
+          end: Alignment(endStart, endStop),
           stops: [0.0, 1.0],
         ),
       ),
