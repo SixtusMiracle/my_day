@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_day/models/todo.dart';
 import 'package:my_day/shared/constants.dart';
 import 'package:intl/intl.dart';
@@ -43,9 +44,10 @@ class Body extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: miDefaultSize * 0.4),
-                      child: circularGradientIcon(
-                          icon: todos[0].icon,
-                          dotColorCode: todos[0].colorCode),
+                      child: CircularGradientIcon(
+                        icon: todos[0].icon,
+                        dotColorCode: todos[0].colorCode,
+                      ),
                     ),
                   ],
                 ),
