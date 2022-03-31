@@ -8,7 +8,7 @@
 
 ## About my_day
 
-A wonderful todo app to help you manage your day.
+An awesome app to help you manage your day.
 
 ## Instalation
 
