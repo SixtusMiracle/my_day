@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/home/components/new_task/mi_new_task_sidebar.dart';
 import '../constants.dart';
 import 'circular_gradient_icon.dart';
 
@@ -73,7 +74,23 @@ class MiBottomAppBar extends StatelessWidget {
                   blurRadius: 6,
                 ),
               ],
-              press: () {},
+              press: () {
+                showGeneralDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  barrierLabel: 'Label',
+                  pageBuilder: (
+                    BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                  ) {
+                    return Align(
+                      alignment: Alignment.centerRight,
+                      child: MiNewTaskSidebar(),
+                    );
+                  },
+                );
+              },
             ),
           ],
         ),

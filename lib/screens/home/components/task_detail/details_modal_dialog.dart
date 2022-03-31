@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../models/todo.dart';
-import '../../shared/constants.dart';
+import '../../../../models/todo.dart';
+import '../../../../shared/constants.dart';
 import 'components/detail_title_card.dart';
 import 'components/mi_close_button.dart';
 import 'components/mi_content_box.dart';

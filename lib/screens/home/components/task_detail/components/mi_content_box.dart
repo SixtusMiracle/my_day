@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/constants.dart';
+import '../../../../../shared/constants.dart';
 
 class MiContentBox extends StatelessWidget {
   const MiContentBox({

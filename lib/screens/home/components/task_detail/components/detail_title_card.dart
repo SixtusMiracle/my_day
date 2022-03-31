@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/todo.dart';
-import '../../../shared/constants.dart';
-import '../../../shared/util/circular_gradient_icon.dart';
+import '../../../../../models/todo.dart';
+import '../../../../../shared/constants.dart';
+import '../../../../../shared/util/circular_gradient_icon.dart';
 import 'schedule.dart';
 
 class DetailTitleCard extends StatelessWidget {

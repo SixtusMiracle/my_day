@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../shared/constants.dart';
+import '../../../../../shared/constants.dart';
 
 class Schedule extends StatelessWidget {
   const Schedule({

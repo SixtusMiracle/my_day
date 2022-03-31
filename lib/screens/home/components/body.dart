@@ -3,7 +3,7 @@ import 'package:my_day/models/todo.dart';
 import 'package:my_day/shared/constants.dart';
 
 import '../../../shared/util/background.dart';
-import '../../task_detail/details_modal_dialog.dart';
+import 'task_detail/details_modal_dialog.dart';
 import 'todo_card.dart';
 
 class Body extends StatelessWidget {
