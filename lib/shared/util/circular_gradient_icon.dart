@@ -6,7 +6,7 @@ import '../constants.dart';
 class CircularGradientIcon extends StatelessWidget {
   final String icon;
   final int gradientStartColor, gradientStopColor;
-  final double beginStart, beginStop, endStart, endStop;
+  final double beginStart, beginStop, endStart, endStop, height, width;
 
   const CircularGradientIcon({
     Key? key,
@@ -17,13 +17,15 @@ class CircularGradientIcon extends StatelessWidget {
     required this.beginStop,
     required this.endStart,
     required this.endStop,
+    this.height = 55,
+    this.width = 55,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      width: 55,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.elliptical(9999, 9999)),
         gradient: LinearGradient(

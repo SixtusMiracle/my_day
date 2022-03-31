@@ -56,8 +56,9 @@ class TodoCard extends StatelessWidget {
           title: Text(
             todo.title,
             style: TextStyle(
-              fontSize: miDefaultSize * 1.20,
+              fontSize: miDefaultSize * 1.2,
               overflow: TextOverflow.ellipsis,
+              color: miTextColor,
             ),
           ),
           trailing: Column(
@@ -67,6 +68,7 @@ class TodoCard extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "Lato Black",
                   fontSize: miDefaultSize * 1.2,
+                  color: miTextBoldColor,
                 ),
               ),
               SizedBox(height: miDefaultSize - 4),
@@ -74,6 +76,7 @@ class TodoCard extends StatelessWidget {
                 DateFormat.Hm().format(todo.schedule),
                 style: TextStyle(
                   fontFamily: "Lato Light",
+                  color: miTextColor,
                 ),
               ),
             ],
