@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_day/models/mi_icon.dart';
 
 import '../constants.dart';
 
 class CircularGradientIcon extends StatelessWidget {
-  final String icon;
-  final int gradientStartColor, gradientStopColor;
-  final double beginStart, beginStop, endStart, endStop, height, width;
+  final MiIcon? icon;
+  final double height, width;
   final List<BoxShadow>? boxShadow;
   final Color? color;
   final Function()? press;
@@ -14,12 +14,6 @@ class CircularGradientIcon extends StatelessWidget {
   const CircularGradientIcon({
     Key? key,
     required this.icon,
-    required this.gradientStartColor,
-    required this.gradientStopColor,
-    required this.beginStart,
-    required this.beginStop,
-    required this.endStart,
-    required this.endStop,
     this.height = 55,
     this.width = 55,
     this.boxShadow,
@@ -37,9 +31,12 @@ class CircularGradientIcon extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.elliptical(9999, 9999)),
           gradient: LinearGradient(
-            colors: [Color(gradientStartColor), Color(gradientStopColor)],
-            begin: Alignment(beginStart, beginStop),
-            end: Alignment(endStart, endStop),
+            colors: [
+              Color(icon!.gradientStartColor),
+              Color(icon!.gradientStopColor)
+            ],
+            begin: Alignment(icon!.beginStart, icon!.beginStop),
+            end: Alignment(icon!.endStart, icon!.endStop),
             stops: [0.0, 1.0],
           ),
           boxShadow: boxShadow,
@@ -47,7 +44,7 @@ class CircularGradientIcon extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(miDefaultSize * 1.2),
           child: SvgPicture.asset(
-            icon,
+            icon!.iconPath,
             color: color,
           ),
         ),

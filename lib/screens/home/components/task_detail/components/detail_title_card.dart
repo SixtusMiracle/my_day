@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_day/models/mi_icon.dart';
 
 import '../../../../../models/todo.dart';
 import '../../../../../shared/constants.dart';
@@ -27,13 +28,7 @@ class DetailTitleCard extends StatelessWidget {
         child: Column(
           children: [
             CircularGradientIcon(
-              icon: todo.icon,
-              gradientStartColor: todo.gradientStartColor,
-              gradientStopColor: todo.gradientStopColor,
-              beginStart: todo.beginStart,
-              beginStop: todo.beginStop,
-              endStart: todo.endStart,
-              endStop: todo.endStop,
+              icon: mi_icons[todo.icon],
               height: 48,
               width: 48,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../models/mi_icon.dart';
 import '../../../models/todo.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/util/circular_gradient_icon.dart';
@@ -37,18 +38,14 @@ class TodoCard extends StatelessWidget {
               Positioned(
                 top: 0,
                 left: 0,
-                child: ColorDot(color: Color(todo.colorCode)),
+                child: ColorDot(
+                  color: Color(mi_icons[todo.icon]?.colorCode ?? 0xffffffff),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: miDefaultSize * 0.4),
                 child: CircularGradientIcon(
-                  icon: todo.icon,
-                  gradientStartColor: todo.gradientStartColor,
-                  gradientStopColor: todo.gradientStopColor,
-                  beginStart: todo.beginStart,
-                  beginStop: todo.beginStop,
-                  endStart: todo.endStart,
-                  endStop: todo.endStop,
+                  icon: mi_icons[todo.icon],
                 ),
               ),
             ],

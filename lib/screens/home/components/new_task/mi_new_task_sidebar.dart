@@ -9,12 +9,13 @@ class MiNewTaskSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+
     return Material(
       type: MaterialType.transparency,
       child: Container(
         height: size.height,
         width: size.width * 0.8,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(miDefaultSize * 1.3),
             bottomLeft: Radius.circular(miDefaultSize * 1.3),
@@ -36,7 +37,7 @@ class MiNewTaskSidebar extends StatelessWidget {
             vertical: miDefaultSize * 0.01,
           ),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,11 +49,43 @@ class MiNewTaskSidebar extends StatelessWidget {
                     fontSize: miDefaultSize * 2.4,
                   ),
                 ),
+                SizedBox(height: miDefaultSize * 0.7),
+                Form(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Icon",
+                        style: TextStyle(
+                          fontFamily: "Lato Black",
+                          fontSize: miDefaultSize * 1.8,
+                          color: miTextBoldColor.withOpacity(0.5),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         )),
       ),
     );
+  }
+}
+
+// icons widget
+class IconsCarousel extends StatefulWidget {
+  const IconsCarousel({Key? key}) : super(key: key);
+
+  @override
+  State<IconsCarousel> createState() => _IconsCarouselState();
+}
+
+class _IconsCarouselState extends State<IconsCarousel> {
+  // List<object> =
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

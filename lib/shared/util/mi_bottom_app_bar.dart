@@ -20,16 +20,10 @@ class MiBottomAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             CircularGradientIcon(
-              icon: "assets/icons/tick.svg",
-              gradientStartColor: 0xFFFFFB01,
-              gradientStopColor: 0xFF067017,
-              beginStart: -0.8,
-              beginStop: 0.81,
-              endStart: 1.2,
-              endStop: -1.23,
+              icon: mi_icons["tick"],
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0x4dfe1e9a),
+                  color: Color(0xCEA3A108),
                   offset: Offset(0, 3),
                   blurRadius: 6,
                 ),
@@ -39,13 +33,7 @@ class MiBottomAppBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: miDefaultSize * 1.3),
               child: CircularGradientIcon(
-                icon: "assets/icons/calendar.svg",
-                gradientStartColor: 0xffffffff,
-                gradientStopColor: 0xffffffff,
-                beginStart: -0.8,
-                beginStop: 0.81,
-                endStart: 1.2,
-                endStop: -1.23,
+                icon: mi_icons["calendar"],
                 height: 70,
                 width: 70,
                 boxShadow: [
@@ -60,13 +48,7 @@ class MiBottomAppBar extends StatelessWidget {
               ),
             ),
             CircularGradientIcon(
-              icon: "assets/icons/plus.svg",
-              gradientStartColor: 0xFF020202,
-              gradientStopColor: 0xFF01E1FF,
-              beginStart: 1.22,
-              beginStop: -1.22,
-              endStart: -0.65,
-              endStop: 1.52,
+              icon: mi_icons["plus"],
               boxShadow: [
                 BoxShadow(
                   color: const Color(0x4d00ffff),
