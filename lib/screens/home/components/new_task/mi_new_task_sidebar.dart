@@ -82,7 +82,10 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MiFormLabel(text: "Icon"),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: miDefaultSize),
+                        child: MiFormLabel(text: "Icon"),
+                      ),
                       SizedBox(
                         height: miDefaultSize * 5.5,
                         child: ListView.builder(
@@ -102,6 +105,15 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                             },
                           ),
                         ),
+                      ),
+                      SizedBox(height: miDefaultSize * 1.3),
+                      MiFormLabel(text: "Name"),
+                      TextFormField(
+                        style: TextStyle(
+                          fontSize: miDefaultSize * 1.6,
+                          color: miTextColor,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ],
                   ),

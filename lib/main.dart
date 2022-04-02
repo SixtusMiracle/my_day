@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'My Day',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primarySwatch: Colors.purple,
         fontFamily: 'Lato',
       ),
       initialRoute: Home.routeName,

@@ -12,15 +12,12 @@ class MiFormLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: miDefaultSize),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: "Lato Black",
-          fontSize: miDefaultSize * 1.8,
-          color: miTextBoldColor.withOpacity(0.5),
-        ),
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: "Lato Black",
+        fontSize: miDefaultSize * 1.8,
+        color: miTextBoldColor.withOpacity(0.5),
       ),
     );
   }
