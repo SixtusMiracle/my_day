@@ -16,7 +16,7 @@ class MiFormLabel extends StatelessWidget {
       text,
       style: TextStyle(
         fontFamily: "Lato Black",
-        fontSize: miDefaultSize * 1.8,
+        fontSize: miDefaultSize * 1.7,
         color: miTextBoldColor.withOpacity(0.5),
       ),
     );

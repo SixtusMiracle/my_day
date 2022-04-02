@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_day/screens/home/components/new_task/components/mi_form_label.dart';
+import 'package:my_day/screens/home/components/new_task/components/mi_form_text_area.dart';
 import 'package:my_day/shared/constants.dart';
+import 'package:my_day/shared/util/mi_button_primary.dart';
 
 import '../../../../shared/util/circular_gradient_icon.dart';
 import '../../../../shared/util/color_dot.dart';
@@ -109,11 +111,36 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                       SizedBox(height: miDefaultSize * 1.3),
                       MiFormLabel(text: "Name"),
                       TextFormField(
+                        validator: (val) =>
+                            val!.isEmpty ? "Please enter task name" : null,
+                        onChanged: (val) => setState(() => _title = val),
                         style: TextStyle(
-                          fontSize: miDefaultSize * 1.6,
+                          fontSize: miDefaultSize * 1.5,
                           color: miTextColor,
                         ),
-                        textAlign: TextAlign.left,
+                        decoration: InputDecoration(
+                          hintText: "Enter task name",
+                          errorStyle: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ),
+                      SizedBox(height: miDefaultSize * 2),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: miDefaultSize),
+                        child: MiFormLabel(text: "Description"),
+                      ),
+                      MiFormTextArea(
+                        changed: (val) => setState(() => _description = val),
+                      ),
+                      SizedBox(height: miDefaultSize * 3.3),
+                      MiButtonPrimary(
+                        verticalSymmetricPadding: miDefaultSize * 0.5,
+                        text: "Add",
+                        press: () async {
+                          // validate new task form
+                          if (_newTaskFormKey.currentState!.validate()) {
+                            // TODO: submit form
+                          }
+                        },
                       ),
                     ],
                   ),

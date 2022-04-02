@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../models/task.dart';
 import '../../../../shared/constants.dart';
 import 'components/detail_title_card.dart';
-import 'components/mi_close_button.dart';
+import '../../../../shared/util/mi_button_primary.dart';
 import 'components/mi_content_box.dart';
 
 class DetailsModalDialog extends StatelessWidget {
@@ -50,7 +50,10 @@ class DetailsModalDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MiCloseButton(),
+            MiButtonPrimary(
+              text: "Close",
+              press: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ],

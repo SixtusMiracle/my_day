@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../shared/constants.dart';
+import '../constants.dart';
 
-class MiCloseButton extends StatelessWidget {
-  const MiCloseButton({
+class MiButtonPrimary extends StatelessWidget {
+  const MiButtonPrimary({
     Key? key,
+    this.verticalSymmetricPadding = miDefaultSize * 0.01,
+    required this.text,
+    this.press,
   }) : super(key: key);
+
+  final double verticalSymmetricPadding;
+  final String text;
+  final Function()? press;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 150,
       padding: EdgeInsets.symmetric(
         horizontal: miDefaultSize * 1.5,
-        vertical: miDefaultSize * 0.01,
+        vertical: verticalSymmetricPadding,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(miDefaultSize * 3),
@@ -31,17 +39,15 @@ class MiCloseButton extends StatelessWidget {
         ],
       ),
       child: TextButton(
-        child: const Text(
-          'Close',
+        child: Text(
+          text,
           style: TextStyle(
             fontFamily: "Baloo",
             fontSize: miDefaultSize * 1.5,
             color: Colors.white,
           ),
         ),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
+        onPressed: press,
       ),
     );
   }
