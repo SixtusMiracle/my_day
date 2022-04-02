@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/todo.dart';
+import '../../../../models/task.dart';
 import '../../../../shared/constants.dart';
 import 'components/detail_title_card.dart';
 import 'components/mi_close_button.dart';
 import 'components/mi_content_box.dart';
 
 class DetailsModalDialog extends StatelessWidget {
-  final Todo todo;
+  final Task task;
 
   const DetailsModalDialog({
     Key? key,
-    required this.todo,
+    required this.task,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: DetailTitleCard(todo: todo),
+      title: DetailTitleCard(task: task),
       titlePadding: EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(miDefaultSize),
@@ -42,7 +42,7 @@ class DetailsModalDialog extends StatelessWidget {
                 ),
               ),
             ),
-            MiContentBox(description: todo.description),
+            MiContentBox(description: task.description),
           ],
         ),
       ),

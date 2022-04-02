@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../models/mi_icon.dart';
-import '../../../models/todo.dart';
+import '../../../models/task.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/util/circular_gradient_icon.dart';
 import '../../../shared/util/color_dot.dart';
 
-class TodoCard extends StatelessWidget {
-  final Todo todo;
+class TaskCard extends StatelessWidget {
+  final Task task;
   final Function()? press;
 
-  const TodoCard({
+  const TaskCard({
     Key? key,
-    required this.todo,
+    required this.task,
     required this.press,
   }) : super(key: key);
 
@@ -39,19 +38,19 @@ class TodoCard extends StatelessWidget {
                 top: 0,
                 left: 0,
                 child: ColorDot(
-                  color: Color(mi_icons[todo.icon]?.colorCode ?? 0xffffffff),
+                  color: Color(miIcons[task.icon]?.colorCode ?? 0xffffffff),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: miDefaultSize * 0.4),
                 child: CircularGradientIcon(
-                  icon: mi_icons[todo.icon],
+                  icon: miIcons[task.icon],
                 ),
               ),
             ],
           ),
           title: Text(
-            todo.title,
+            task.title,
             style: TextStyle(
               fontSize: miDefaultSize * 1.2,
               overflow: TextOverflow.ellipsis,
@@ -61,7 +60,7 @@ class TodoCard extends StatelessWidget {
           trailing: Column(
             children: [
               Text(
-                DateFormat('d MMM').format(todo.schedule),
+                DateFormat('d MMM').format(task.schedule),
                 style: TextStyle(
                   fontFamily: "Lato Black",
                   fontSize: miDefaultSize * 1.2,
@@ -70,7 +69,7 @@ class TodoCard extends StatelessWidget {
               ),
               SizedBox(height: miDefaultSize - 4),
               Text(
-                DateFormat.Hm().format(todo.schedule),
+                DateFormat.Hm().format(task.schedule),
                 style: TextStyle(
                   fontFamily: "Lato Light",
                   color: miTextColor,

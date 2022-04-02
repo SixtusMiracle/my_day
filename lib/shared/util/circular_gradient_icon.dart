@@ -10,6 +10,7 @@ class CircularGradientIcon extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final Color? color;
   final Function()? press;
+  final bool isActive;
 
   const CircularGradientIcon({
     Key? key,
@@ -19,6 +20,7 @@ class CircularGradientIcon extends StatelessWidget {
     this.boxShadow,
     this.color = Colors.white,
     this.press,
+    this.isActive = false,
   }) : super(key: key);
 
   @override
@@ -40,9 +42,15 @@ class CircularGradientIcon extends StatelessWidget {
             stops: [0.0, 1.0],
           ),
           boxShadow: boxShadow,
+          border: isActive
+              ? Border.all(
+                  color: Colors.greenAccent,
+                  width: miDefaultSize * 0.21,
+                )
+              : null,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(miDefaultSize * 1.2),
+          padding: const EdgeInsets.all(miDefaultSize * 1.15),
           child: SvgPicture.asset(
             icon!.iconPath,
             color: color,

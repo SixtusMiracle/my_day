@@ -6,7 +6,39 @@ const miTextColor = Color(0xFF181743);
 const miTextBoldColor = Color(0xFF464569);
 const miDefaultSize = 14.0;
 
-Map<String, MiIcon> mi_icons = {
+Map<String, MiIcon> miIcons = {
+  // app icons
+  "tick": MiIcon(
+    iconPath: "assets/icons/tick.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xFFFFFB01,
+    gradientStopColor: 0xFF067017,
+    beginStart: -0.8,
+    beginStop: 0.81,
+    endStart: 1.2,
+    endStop: -1.23,
+  ),
+  "calendar": MiIcon(
+    iconPath: "assets/icons/calendar.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xffffffff,
+    gradientStopColor: 0xffffffff,
+    beginStart: -0.8,
+    beginStop: 0.81,
+    endStart: 1.2,
+    endStop: -1.23,
+  ),
+  "plus": MiIcon(
+    iconPath: "assets/icons/plus.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xFF020202,
+    gradientStopColor: 0xFF01E1FF,
+    beginStart: 1.22,
+    beginStop: -1.22,
+    endStart: -0.65,
+    endStop: 1.52,
+  ),
+  // task icons
   "cart": MiIcon(
     iconPath: "assets/icons/shopping_cart.svg",
     colorCode: 0x4dfea64c,
@@ -37,34 +69,34 @@ Map<String, MiIcon> mi_icons = {
     endStart: 1.0,
     endStop: -1.0,
   ),
-  "tick": MiIcon(
-    iconPath: "assets/icons/tick.svg",
-    colorCode: 0xffffffff,
-    gradientStartColor: 0xFFFFFB01,
-    gradientStopColor: 0xFF067017,
-    beginStart: -0.8,
-    beginStop: 0.81,
-    endStart: 1.2,
-    endStop: -1.23,
+  "general": MiIcon(
+    iconPath: "assets/icons/general.svg",
+    colorCode: 0x80181743,
+    gradientStartColor: 0xff181743,
+    gradientStopColor: 0xff88889f,
+    beginStart: -0.83,
+    beginStop: 1.0,
+    endStart: 0.85,
+    endStop: -1.0,
   ),
-  "calendar": MiIcon(
-    iconPath: "assets/icons/calendar.svg",
-    colorCode: 0xffffffff,
-    gradientStartColor: 0xffffffff,
-    gradientStopColor: 0xffffffff,
-    beginStart: -0.8,
-    beginStop: 0.81,
-    endStart: 1.2,
-    endStop: -1.23,
+  "drink": MiIcon(
+    iconPath: "assets/icons/drink.svg",
+    colorCode: 0x4d00ffff,
+    gradientStartColor: 0xff254dde,
+    gradientStopColor: 0xff00ffff,
+    beginStart: -1.0,
+    beginStop: 1.31,
+    endStart: 1.16,
+    endStop: -1.0,
   ),
-  "plus": MiIcon(
-    iconPath: "assets/icons/plus.svg",
-    colorCode: 0xffffffff,
-    gradientStartColor: 0xFF020202,
-    gradientStopColor: 0xFF01E1FF,
-    beginStart: 1.22,
-    beginStop: -1.22,
-    endStart: -0.65,
-    endStop: 1.52,
+  "gym": MiIcon(
+    iconPath: "assets/icons/gym.svg",
+    colorCode: 0x4dfe1e9a,
+    gradientStartColor: 0xfffe1e9a,
+    gradientStopColor: 0xff254dde,
+    beginStart: -0.83,
+    beginStop: 1.0,
+    endStart: 0.85,
+    endStop: -1.0,
   ),
 };

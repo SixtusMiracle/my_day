@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_day/models/mi_icon.dart';
 
-import '../../../../../models/todo.dart';
+import '../../../../../models/task.dart';
 import '../../../../../shared/constants.dart';
 import '../../../../../shared/util/circular_gradient_icon.dart';
 import 'schedule.dart';
@@ -9,10 +8,10 @@ import 'schedule.dart';
 class DetailTitleCard extends StatelessWidget {
   const DetailTitleCard({
     Key? key,
-    required this.todo,
+    required this.task,
   }) : super(key: key);
 
-  final Todo todo;
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +27,13 @@ class DetailTitleCard extends StatelessWidget {
         child: Column(
           children: [
             CircularGradientIcon(
-              icon: mi_icons[todo.icon],
+              icon: miIcons[task.icon],
               height: 48,
               width: 48,
             ),
             SizedBox(height: miDefaultSize * 1.4),
             Text(
-              todo.title,
+              task.title,
               style: TextStyle(
                 fontSize: miDefaultSize * 1.3,
                 fontWeight: FontWeight.bold,
@@ -45,7 +44,7 @@ class DetailTitleCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: miDefaultSize * 0.45),
-              child: Schedule(schedule: todo.schedule),
+              child: Schedule(schedule: task.schedule),
             ),
           ],
         ),

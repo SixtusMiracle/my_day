@@ -10,20 +10,7 @@
 
 An awesome app to help you manage your day.
 
-## Instalation
-
-```bash
-git clone https://github.com/sixtusmiracle/my_day
-```
-
-```bash
-flutter pub get
-```
-
-#### Run the app
-```bash
-flutter run
-```
+<!-- TODO: ## Installation Add playstore and appstore links -->
 
 ## About the Author
 

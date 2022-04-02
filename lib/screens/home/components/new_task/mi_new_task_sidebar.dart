@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:my_day/screens/home/components/new_task/components/mi_form_label.dart';
 import 'package:my_day/shared/constants.dart';
 
-class MiNewTaskSidebar extends StatelessWidget {
+import '../../../../shared/util/circular_gradient_icon.dart';
+import '../../../../shared/util/color_dot.dart';
+import 'components/icons_row.dart';
+
+class MiNewTaskSidebar extends StatefulWidget {
   const MiNewTaskSidebar({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<MiNewTaskSidebar> createState() => _MiNewTaskSidebarState();
+}
+
+class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
+  final _newTaskFormKey = GlobalKey<FormState>();
+  List<String> icons = [
+    "general",
+    "cart",
+    "basketball",
+    "location",
+    "drink",
+    "gym"
+  ];
+  int selectedIndex = 0;
+
+  // form values
+  String _icon = "";
+  String _title = "";
+  String _description = "";
+  DateTime _schedule = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +76,31 @@ class MiNewTaskSidebar extends StatelessWidget {
                     fontSize: miDefaultSize * 2.4,
                   ),
                 ),
-                SizedBox(height: miDefaultSize * 0.7),
+                SizedBox(height: miDefaultSize),
                 Form(
+                  key: _newTaskFormKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Icon",
-                        style: TextStyle(
-                          fontFamily: "Lato Black",
-                          fontSize: miDefaultSize * 1.8,
-                          color: miTextBoldColor.withOpacity(0.5),
+                      MiFormLabel(text: "Icon"),
+                      SizedBox(
+                        height: miDefaultSize * 5.5,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: icons.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              IconsRow(
+                            index: index,
+                            selectedIndex: selectedIndex,
+                            icons: icons,
+                            tap: () {
+                              setState(() {
+                                selectedIndex = index;
+                                _icon = icons[index];
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -70,22 +112,5 @@ class MiNewTaskSidebar extends StatelessWidget {
         )),
       ),
     );
-  }
-}
-
-// icons widget
-class IconsCarousel extends StatefulWidget {
-  const IconsCarousel({Key? key}) : super(key: key);
-
-  @override
-  State<IconsCarousel> createState() => _IconsCarouselState();
-}
-
-class _IconsCarouselState extends State<IconsCarousel> {
-  // List<object> =
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
