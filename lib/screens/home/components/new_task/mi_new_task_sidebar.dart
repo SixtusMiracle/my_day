@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_day/screens/home/components/new_task/components/mi_form_label.dart';
 import 'package:my_day/screens/home/components/new_task/components/mi_form_text_area.dart';
 import 'package:my_day/shared/constants.dart';
 import 'package:my_day/shared/util/mi_button_primary.dart';
 
-import '../../../../shared/util/circular_gradient_icon.dart';
-import '../../../../shared/util/color_dot.dart';
 import 'components/icons_row.dart';
 
 class MiNewTaskSidebar extends StatefulWidget {
@@ -18,7 +17,7 @@ class MiNewTaskSidebar extends StatefulWidget {
 }
 
 class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
-  final _newTaskFormKey = GlobalKey<FormState>();
+  // for icons input field
   List<String> icons = [
     "general",
     "cart",
@@ -29,11 +28,60 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
   ];
   int selectedIndex = 0;
 
-  // form values
-  String _icon = "";
+  // controllers
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
+
+  // form state values
+  final _newTaskFormKey = GlobalKey<FormState>();
+  String _icon = "general";
   String _title = "";
   String _description = "";
-  DateTime _schedule = DateTime.now();
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTime =
+      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+
+  // select date function
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2022, 1, 1),
+      lastDate: DateTime(2022, 12, 31),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+    );
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked;
+        _dateController.text = DateFormat('d - MMMM - y').format(_selectedDate);
+      });
+    }
+  }
+
+  // select time function
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+    );
+    if (picked != null) {
+      setState(() {
+        _selectedTime = picked;
+        _timeController.text = DateFormat('h:mm a')
+            .format(
+                DateTime(2022, 1, 1, _selectedTime.hour, _selectedTime.minute))
+            .toString();
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _dateController.text = DateFormat('d - MMMM - y').format(DateTime.now());
+    _timeController.text = DateFormat('h:mm a').format(DateTime.now());
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,13 +179,49 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                       MiFormTextArea(
                         changed: (val) => setState(() => _description = val),
                       ),
-                      SizedBox(height: miDefaultSize * 3.3),
+                      SizedBox(height: miDefaultSize * 2),
+                      MiFormLabel(text: "Date"),
+                      GestureDetector(
+                        onTap: () => _selectDate(context),
+                        child: TextFormField(
+                          style: TextStyle(
+                            fontSize: miDefaultSize * 1.5,
+                            color: miTextColor,
+                          ),
+                          enabled: false,
+                          keyboardType: TextInputType.text,
+                          controller: _dateController,
+                        ),
+                      ),
+                      SizedBox(height: miDefaultSize * 2),
+                      MiFormLabel(text: "Time"),
+                      GestureDetector(
+                        onTap: () => _selectTime(context),
+                        child: TextFormField(
+                          style: TextStyle(
+                            fontSize: miDefaultSize * 1.5,
+                            color: miTextColor,
+                          ),
+                          enabled: false,
+                          keyboardType: TextInputType.text,
+                          controller: _timeController,
+                        ),
+                      ),
+                      SizedBox(height: miDefaultSize * 3),
                       MiButtonPrimary(
                         verticalSymmetricPadding: miDefaultSize * 0.5,
                         text: "Add",
                         press: () async {
                           // validate new task form
                           if (_newTaskFormKey.currentState!.validate()) {
+                            // merging selected date and time to form schedule
+                            final DateTime _schedule = DateTime(
+                              _selectedDate.year,
+                              _selectedDate.month,
+                              _selectedDate.day,
+                              _selectedTime.hour,
+                              _selectedTime.minute,
+                            );
                             // TODO: submit form
                           }
                         },
