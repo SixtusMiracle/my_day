@@ -1,8 +1,10 @@
 class Task {
   final String icon, title, description;
   final DateTime schedule;
+  final bool done;
 
   Task({
+    this.done = false,
     required this.title,
     required this.description,
     required this.icon,

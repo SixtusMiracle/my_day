@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context: context),
       body: Body(),
       extendBody: true,
       bottomNavigationBar: MiBottomAppBar(),

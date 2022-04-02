@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../models/task.dart';
@@ -9,11 +10,13 @@ import '../../../shared/util/color_dot.dart';
 class TaskCard extends StatelessWidget {
   final Task task;
   final Function()? press;
+  final bool doneScreen;
 
   const TaskCard({
     Key? key,
     required this.task,
-    required this.press,
+    this.press,
+    this.doneScreen = false,
   }) : super(key: key);
 
   @override
@@ -37,9 +40,17 @@ class TaskCard extends StatelessWidget {
               Positioned(
                 top: 0,
                 left: 0,
-                child: ColorDot(
-                  color: Color(miIcons[task.icon]?.colorCode ?? 0xffffffff),
-                ),
+                child: doneScreen
+                    ? SvgPicture.asset(
+                        "assets/icons/done_task.svg",
+                        color:
+                            Color(miIcons[task.icon]?.colorCode ?? 0xffffffff)
+                                .withOpacity(1.0),
+                      )
+                    : ColorDot(
+                        color:
+                            Color(miIcons[task.icon]?.colorCode ?? 0xffffffff),
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: miDefaultSize * 0.4),
