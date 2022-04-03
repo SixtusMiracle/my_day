@@ -28,6 +28,16 @@ Map<String, MiIcon> miIcons = {
     endStart: 1.2,
     endStop: -1.23,
   ),
+  "mi_bottom_menu": MiIcon(
+    iconPath: "assets/icons/mi_bottom_menu.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xffffffff,
+    gradientStopColor: 0xffffffff,
+    beginStart: -0.8,
+    beginStop: 0.81,
+    endStart: 1.2,
+    endStop: -1.23,
+  ),
   "plus": MiIcon(
     iconPath: "assets/icons/plus.svg",
     colorCode: 0xffffffff,

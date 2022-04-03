@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_day/screens/calendar_mode/calendar_mode.dart';
+import 'package:my_day/screens/home/home.dart';
 import 'package:my_day/screens/mark_done/mark_done.dart';
 import 'package:my_day/shared/animations/mi_fade_page_route.dart';
 
@@ -10,9 +12,10 @@ class MiBottomAppBar extends StatelessWidget {
   const MiBottomAppBar({
     Key? key,
     this.markDoneScreen = false,
+    this.isCalendarMode = false,
   }) : super(key: key);
 
-  final bool markDoneScreen;
+  final bool markDoneScreen, isCalendarMode;
 
   @override
   Widget build(BuildContext context) {
@@ -74,20 +77,41 @@ class MiBottomAppBar extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: miDefaultSize * 1.3),
-                    child: CircularGradientIcon(
-                      icon: miIcons["calendar"],
-                      height: 70,
-                      width: 70,
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0x33181743),
-                          offset: Offset(0, 4),
-                          blurRadius: 6,
-                        ),
-                      ],
-                      color: null,
-                      press: () {},
-                    ),
+                    child: isCalendarMode
+                        ? CircularGradientIcon(
+                            icon: miIcons["mi_bottom_menu"],
+                            height: 75,
+                            width: 75,
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0x33181743),
+                                offset: Offset(0, 4),
+                                blurRadius: 6,
+                              ),
+                            ],
+                            color: null,
+                            press: () => Navigator.pushReplacement(
+                              context,
+                              MiFadePageRoute(page: Home()),
+                            ),
+                          )
+                        : CircularGradientIcon(
+                            icon: miIcons["calendar"],
+                            height: 75,
+                            width: 75,
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0x33181743),
+                                offset: Offset(0, 4),
+                                blurRadius: 6,
+                              ),
+                            ],
+                            color: null,
+                            press: () => Navigator.pushReplacement(
+                              context,
+                              MiFadePageRoute(page: CalendarMode()),
+                            ),
+                          ),
                   ),
                   CircularGradientIcon(
                     icon: miIcons["plus"],
