@@ -10,7 +10,8 @@ class CircularGradientIcon extends StatelessWidget {
   final List<BoxShadow>? boxShadow;
   final Color? color;
   final Function()? press;
-  final bool isActive;
+  final bool isActive, markDoneScreen;
+  final double allPadding;
 
   const CircularGradientIcon({
     Key? key,
@@ -21,6 +22,8 @@ class CircularGradientIcon extends StatelessWidget {
     this.color = Colors.white,
     this.press,
     this.isActive = false,
+    this.markDoneScreen = false,
+    this.allPadding = miDefaultSize * 1.15,
   }) : super(key: key);
 
   @override
@@ -50,7 +53,7 @@ class CircularGradientIcon extends StatelessWidget {
               : null,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(miDefaultSize * 1.15),
+          padding: EdgeInsets.all(allPadding),
           child: SvgPicture.asset(
             icon!.iconPath,
             color: color,

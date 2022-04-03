@@ -38,6 +38,26 @@ Map<String, MiIcon> miIcons = {
     endStart: -0.65,
     endStop: 1.52,
   ),
+  "times": MiIcon(
+    iconPath: "assets/icons/times.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xff181743,
+    gradientStopColor: 0xff88889f,
+    beginStart: -0.8,
+    beginStop: 0.81,
+    endStart: 1.2,
+    endStop: -1.23,
+  ),
+  "double_tick": MiIcon(
+    iconPath: "assets/icons/double_tick.svg",
+    colorCode: 0xffffffff,
+    gradientStartColor: 0xfffe1e9a,
+    gradientStopColor: 0xff254dde,
+    beginStart: -0.8,
+    beginStop: 0.81,
+    endStart: 1.2,
+    endStop: -1.23,
+  ),
   // task icons
   "cart": MiIcon(
     iconPath: "assets/icons/shopping_cart.svg",
