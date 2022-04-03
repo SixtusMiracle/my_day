@@ -4,5 +4,4 @@ import 'package:my_day/screens/home/home.dart';
 
 final Map<String, WidgetBuilder> routes = {
   Home.routeName: (context) => Home(),
-  DoneTasks.routeName: (context) => DoneTasks(),
 };
