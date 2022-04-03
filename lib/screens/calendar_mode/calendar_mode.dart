@@ -12,8 +12,7 @@ class CalendarMode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-          context: context,
-          title: "${DateFormat("MMMM y").format(DateTime.now())}"),
+          context: context, title: DateFormat("MMMM y").format(DateTime.now())),
       body: Body(),
       extendBody: true,
       bottomNavigationBar: MiBottomAppBar(
