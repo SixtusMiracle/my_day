@@ -130,3 +130,13 @@ Map<String, MiIcon> miIcons = {
     endStop: -1.0,
   ),
 };
+
+int daysInMonth(DateTime date) {
+  DateTime firstDayThisMonth = DateTime(date.year, date.month, date.day);
+  DateTime firstDayNextMonth = DateTime(firstDayThisMonth.year,
+      firstDayThisMonth.month + 1, firstDayThisMonth.day);
+  return firstDayNextMonth.difference(firstDayThisMonth).inDays;
+}
+
+int totalDaysInMonth =
+    daysInMonth(DateTime(DateTime.now().year, DateTime.now().day));

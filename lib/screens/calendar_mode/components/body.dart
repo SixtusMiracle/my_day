@@ -20,8 +20,8 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   ScrollController _datesController = ScrollController();
-  List<int> days = [19, 20, 21, 22, 23, 24, 25];
-  int selectedIndex = 2;
+  List<int> days = List<int>.generate(totalDaysInMonth, (i) => i + 1);
+  int selectedIndex = DateTime.now().day - 1;
 
   Future<void> _showDetailsModal({required Task task}) {
     return showDialog<void>(
