@@ -17,7 +17,7 @@ class MarkDone extends StatelessWidget {
       ),
       body: Body(),
       extendBody: true,
-      bottomNavigationBar: MiBottomAppBar(markDoneScreen: true),
+      bottomNavigationBar: MiBottomAppBar(isMarkDoneScreen: true),
     );
   }
 }

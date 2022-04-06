@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_day/shared/util/background.dart';
+import 'package:my_day/shared/util/task_card.dart';
 
 import '../../../models/task.dart';
 import '../../../shared/constants.dart';
-import '../../home/components/task_card.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
                 itemCount: tasks.length,
                 itemBuilder: (BuildContext context, int index) => TaskCard(
                   task: tasks[index],
-                  markDoneScreen: true,
+                  isMarkDoneScreen: true,
                 ),
               ),
             ),

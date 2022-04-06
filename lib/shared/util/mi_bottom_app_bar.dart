@@ -11,11 +11,11 @@ import 'circular_gradient_icon.dart';
 class MiBottomAppBar extends StatelessWidget {
   const MiBottomAppBar({
     Key? key,
-    this.markDoneScreen = false,
+    this.isMarkDoneScreen = false,
     this.isCalendarMode = false,
   }) : super(key: key);
 
-  final bool markDoneScreen, isCalendarMode;
+  final bool isMarkDoneScreen, isCalendarMode;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class MiBottomAppBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: miDefaultSize * 1.2),
         child: Row(
-          mainAxisAlignment: markDoneScreen
+          mainAxisAlignment: isMarkDoneScreen
               ? MainAxisAlignment.center
               : MainAxisAlignment.spaceEvenly,
-          children: markDoneScreen
+          children: isMarkDoneScreen
               ? <Widget>[
                   CircularGradientIcon(
                     icon: miIcons["times"],

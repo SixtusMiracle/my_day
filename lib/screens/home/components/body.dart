@@ -4,7 +4,7 @@ import 'package:my_day/shared/constants.dart';
 
 import '../../../shared/task_detail/details_modal_dialog.dart';
 import '../../../shared/util/background.dart';
-import 'task_card.dart';
+import '../../../shared/util/task_card.dart';
 
 class Body extends StatelessWidget {
   const Body({

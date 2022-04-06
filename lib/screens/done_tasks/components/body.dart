@@ -3,7 +3,7 @@ import 'package:my_day/shared/util/background.dart';
 
 import '../../../models/task.dart';
 import '../../../shared/constants.dart';
-import '../../home/components/task_card.dart';
+import '../../../shared/util/task_card.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class Body extends StatelessWidget {
                 physics: BouncingScrollPhysics(),
                 itemCount: tasks.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    TaskCard(task: tasks[index], doneScreen: true),
+                    TaskCard(task: tasks[index], isDoneScreen: true),
               ),
             ),
           ],
