@@ -1,45 +1,37 @@
 class Task {
+  final int id;
   final String icon, title, description;
   final DateTime schedule;
-  final bool done;
-  final int id;
+  final bool isDone;
 
   Task({
-    this.done = false,
+    required this.id,
     required this.title,
     required this.description,
     required this.icon,
     required this.schedule,
-    required this.id,
+    this.isDone = false,
   });
+
+  factory Task.fromMap(Map<String, dynamic> json) => Task(
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        icon: json["icon"],
+        schedule: json["schedule"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "title": title,
+        "description": description,
+        "icon": icon,
+        "schedule": schedule,
+        "isDone": isDone,
+      };
+
+  @override
+  String toString() {
+    return 'Task{id: $id, title: $title, description: $description, icon: $icon, schedule: $schedule, isDone: $isDone}';
+  }
 }
-
-String largeDummyText =
-    "Lorem ipsum dolor sit amet, consectetur  ex adipiscing elit, sed do  eiusmod  tempor  incid  idunt  ut  labore  et set  dolore  magna  aliqua.   Ut  enim  ad  minim  veniam,  quis  nostrud  esse  cillum dolore  eu  fugiat  nulla  pariatur.  Excepteur  sint";
-
-String dummyText =
-    "Lorem ipsum dolor sit amet, consectetur  ex adipiscing elit, sed do  eiusmod  tempor  incid  idunt";
-
-List<Task> tasks = [
-  Task(
-    id: 1,
-    icon: "cart",
-    title: "Shopping list, food for the week",
-    description: largeDummyText,
-    schedule: DateTime.now(),
-  ),
-  Task(
-    id: 2,
-    icon: "basketball",
-    title: "Play basketball with Billy and Bob Desmond",
-    description: dummyText,
-    schedule: DateTime.now(),
-  ),
-  Task(
-    id: 3,
-    icon: "location",
-    title: "Go to Richmond Park to get the package",
-    description: dummyText,
-    schedule: DateTime.now(),
-  ),
-];
