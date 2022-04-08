@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_day/screens/done_tasks/done_tasks.dart';
 
 import '../animations/mi_slide_left_page_route.dart';
 import '../constants.dart';
@@ -35,8 +34,9 @@ AppBar buildAppBar({
     actions: hasActions
         ? [
             IconButton(
-              onPressed: () => Navigator.push(
-                  context, MiSlideLeftPageRoute(page: DoneTasks())),
+              // onPressed: () => Navigator.push(
+              //     context, MiSlideLeftPageRoute(page: DoneTasks())),
+              onPressed: () {},
               icon: SvgPicture.asset(
                 "assets/icons/mi_menu.svg",
                 color: Color(0xFFFD939B),

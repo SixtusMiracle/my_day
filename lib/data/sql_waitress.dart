@@ -6,14 +6,14 @@ import 'package:sqflite/sqflite.dart';
 
 class SqlWaitress {
   static Future<void> createTables(Database database) async {
-    await database.execute("""CREATE TABLE tasks(
+    await database.execute('''CREATE TABLE tasks(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      icon TEXT NOT NULL,
-      title TEXT NOT NULL,
-      description TEXT NOT NULL,
-      schedule INTEGER NOT NULL,
-      isDone INTEGER NOT NULL DEFAULT 0,
-    )""");
+      icon TEXT,
+      title TEXT,
+      description TEXT,
+      schedule INTEGER,
+      isDone INTEGER NOT NULL DEFAULT "0"
+    )''');
   }
 
   static Future<Database> database() async {
