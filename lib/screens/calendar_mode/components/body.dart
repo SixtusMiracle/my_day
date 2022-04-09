@@ -33,8 +33,7 @@ class _BodyState extends State<Body> {
   }
 
   void _scrollToSelectedIndex() {
-    double initialScrollTarget =
-        (selectedIndex * (miDefaultSize * 8)) / tasks.length;
+    double initialScrollTarget = (selectedIndex * (miDefaultSize * 8));
 
     if (_datesController.hasClients) {
       _datesController.animateTo(initialScrollTarget,
@@ -53,7 +52,6 @@ class _BodyState extends State<Body> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // TODO: fix correctedOffset issue with this sizedbox
           SizedBox(
             height: miDefaultSize * 8,
             child: ListView.builder(
