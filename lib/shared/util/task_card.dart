@@ -25,7 +25,7 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
-  bool? _isChecked = false;
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +77,31 @@ class _TaskCardState extends State<TaskCard> {
             ),
           ),
           trailing: widget.isMarkDoneScreen
-              ? Checkbox(
-                  value: _isChecked,
-                  onChanged: (bool? val) => setState(() => _isChecked = val),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(miDefaultSize * 0.3),
+              ? InkWell(
+                  onTap: () => setState(() => _isChecked = true),
+                  child: Ink(
+                    width: miDefaultSize * 3,
+                    height: miDefaultSize * 3,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(miDefaultSize * 0.6),
+                      color: const Color(0xffffffff),
+                      border: Border.all(color: const Color(0x33181743)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0x1afe1e9a),
+                          offset: Offset(0, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                    child: _isChecked
+                        ? Padding(
+                            padding: const EdgeInsets.all(miDefaultSize * 0.7),
+                            child: SvgPicture.asset(
+                              "assets/icons/selected.svg",
+                            ),
+                          )
+                        : null,
                   ),
                 )
               : Column(

@@ -33,14 +33,16 @@ class Body extends StatelessWidget {
               builder: (context, outerRef, child) {
                 final asyncTaskProvider =
                     outerRef.watch(futureTaskNotifierProvider);
+
                 return asyncTaskProvider.when(
                   data: (data) {
                     return ProviderScope(
                       overrides: [taskNotifierProvider.overrideWithValue(data)],
                       child: Consumer(
-                        builder: ((context, ref, child) {
+                        builder: (context, ref, child) {
                           final tasks =
                               ref.watch(taskNotifierProvider) as List<Task>;
+
                           return Expanded(
                             child: ListView.builder(
                               physics: BouncingScrollPhysics(),
@@ -52,7 +54,7 @@ class Body extends StatelessWidget {
                                           task: tasks[index])),
                             ),
                           );
-                        }),
+                        },
                       ),
                     );
                   },

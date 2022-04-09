@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/screens/calendar_mode/components/days_row.dart';
 
+import '../../../providers/task_notifier.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/task_detail/details_modal_dialog.dart';
 import '../../../shared/util/background.dart';
@@ -51,6 +53,7 @@ class _BodyState extends State<Body> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // TODO: fix correctedOffset issue with this sizedbox
           SizedBox(
             height: miDefaultSize * 8,
             child: ListView.builder(
@@ -67,18 +70,38 @@ class _BodyState extends State<Body> {
             ),
           ),
           SizedBox(height: miDefaultSize * 1.7),
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: tasks.length,
-              itemBuilder: (BuildContext context, int index) {
-                return TaskRow(
-                  task: tasks[index],
-                  tap: () => _showDetailsModal(task: tasks[index]),
-                );
-              },
-            ),
-          ),
+          Consumer(builder: (context, outerRef, child) {
+            final asyncTaskProvider =
+                outerRef.watch(futureTaskNotifierProvider);
+
+            return asyncTaskProvider.when(
+              data: (data) => ProviderScope(
+                overrides: [taskNotifierProvider.overrideWithValue(data)],
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final tasks = ref.watch(taskNotifierProvider) as List<Task>;
+
+                    return Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: tasks.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            TaskRow(
+                          task: tasks[index],
+                          tap: () => _showDetailsModal(task: tasks[index]),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              error: (_, stack) => Center(
+                child: Text(_.toString()),
+              ),
+              loading: () =>
+                  const Center(child: CircularProgressIndicator.adaptive()),
+            );
+          }),
         ],
       ),
     );

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_day/screens/home/home.dart';
 import 'package:my_day/shared/animations/mi_fade_page_route.dart';
 
+import '../../screens/calendar_mode/calendar_mode.dart';
 import '../../screens/home/components/new_task/mi_new_task_sidebar.dart';
+import '../../screens/mark_done/mark_done.dart';
 import '../constants.dart';
 import 'circular_gradient_icon.dart';
 
@@ -70,9 +72,8 @@ class MiBottomAppBar extends StatelessWidget {
                         blurRadius: 6,
                       ),
                     ],
-                    // press: () => Navigator.push(
-                    //     context, MiFadePageRoute(page: MarkDone())),
-                    press: () {},
+                    press: () => Navigator.push(
+                        context, MiFadePageRoute(page: MarkDone())),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: miDefaultSize * 1.3),
@@ -106,11 +107,10 @@ class MiBottomAppBar extends StatelessWidget {
                               ),
                             ],
                             color: null,
-                            // press: () => Navigator.pushReplacement(
-                            //   context,
-                            //   MiFadePageRoute(page: CalendarMode()),
-                            // ),
-                            press: () {},
+                            press: () => Navigator.pushReplacement(
+                              context,
+                              MiFadePageRoute(page: CalendarMode()),
+                            ),
                           ),
                   ),
                   CircularGradientIcon(

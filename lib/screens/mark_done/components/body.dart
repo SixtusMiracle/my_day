@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_day/models/task.dart';
+import 'package:my_day/providers/task_notifier.dart';
 import 'package:my_day/shared/util/background.dart';
 import 'package:my_day/shared/util/task_card.dart';
 
-import '../../../models/task.dart';
 import '../../../shared/constants.dart';
 
 class Body extends StatelessWidget {
@@ -17,16 +19,37 @@ class Body extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: miDefaultSize * 2.3),
-            Expanded(
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(),
-                itemCount: tasks.length,
-                itemBuilder: (BuildContext context, int index) => TaskCard(
-                  task: tasks[index],
-                  isMarkDoneScreen: true,
+            Consumer(builder: (context, outerRef, child) {
+              final asyncTaskProvider =
+                  outerRef.watch(futureTaskNotifierProvider);
+
+              return asyncTaskProvider.when(
+                data: (data) => ProviderScope(
+                  overrides: [taskNotifierProvider.overrideWithValue(data)],
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      final tasks =
+                          ref.watch(taskNotifierProvider) as List<Task>;
+
+                      return Expanded(
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: tasks.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              TaskCard(
+                            task: tasks[index],
+                            isMarkDoneScreen: true,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ),
+                error: (_, stack) => Center(child: Text(_.toString())),
+                loading: () =>
+                    const Center(child: CircularProgressIndicator.adaptive()),
+              );
+            }),
           ],
         ),
       ),

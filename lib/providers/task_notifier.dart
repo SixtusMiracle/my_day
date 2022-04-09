@@ -14,7 +14,5 @@ final taskNotifierProvider =
     StateNotifierProvider((ref) => TaskNotifier(tasks));
 
 class TaskNotifier extends StateNotifier<List<Task>> {
-  final TaskService _taskService = TaskService();
-
   TaskNotifier(tasks) : super(tasks);
 }
