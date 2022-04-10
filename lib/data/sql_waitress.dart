@@ -29,12 +29,12 @@ class SqlWaitress {
     );
   }
 
-  static Future<int> createTask(Task newTask) async {
+  static Future<int> createTask(Map<String, dynamic> newTask) async {
     final db = await database();
 
     final id = await db.insert(
       "tasks",
-      newTask.toMap(),
+      newTask,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
     return id;
@@ -61,5 +61,13 @@ class SqlWaitress {
       where: "id = ?",
       whereArgs: [id],
     );
+  }
+
+  static Future<int> getBiggestIdFromTasks() async {
+    final db = await database();
+
+    var table = await db.rawQuery("SELECT MAX(id)+1 as id FROM tasks");
+    int id = table.first["id"] == null ? 1 : table.first["id"] as int;
+    return id;
   }
 }

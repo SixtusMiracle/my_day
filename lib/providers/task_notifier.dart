@@ -15,4 +15,11 @@ final taskNotifierProvider =
 
 class TaskNotifier extends StateNotifier<List<Task>> {
   TaskNotifier(tasks) : super(tasks);
+
+  addTask(Task newTask) {
+    state = [
+      newTask,
+      ...state,
+    ];
+  }
 }
