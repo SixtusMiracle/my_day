@@ -28,17 +28,38 @@ class Body extends StatelessWidget {
                   overrides: [taskNotifierProvider.overrideWithValue(data)],
                   child: Consumer(
                     builder: (context, ref, child) {
-                      final tasks =
+                      final allTasks =
                           ref.watch(taskNotifierProvider) as List<Task>;
+                      final tasks = allTasks
+                          .where((Task task) => task.isDone == true)
+                          .toList();
 
-                      return Expanded(
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: tasks.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              TaskCard(task: tasks[index], isDoneScreen: true),
-                        ),
-                      );
+                      return tasks.length == 0
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: miDefaultSize,
+                                vertical: miDefaultSize * 20,
+                              ),
+                              child: Text(
+                                "No done tasks yet...",
+                                style: TextStyle(
+                                  fontFamily: "Lato Black",
+                                  fontSize: miDefaultSize * 3,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: tasks.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) =>
+                                        TaskCard(
+                                            task: tasks[index],
+                                            isDoneScreen: true),
+                              ),
+                            );
                     },
                   ),
                 ),
