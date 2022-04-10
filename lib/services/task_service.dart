@@ -48,4 +48,14 @@ class TaskService {
       rethrow;
     }
   }
+
+  Future<String> markTaskAsDone(int id) async {
+    try {
+      await SqlWaitress.updateTaskAsDone(id);
+
+      return "success";
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

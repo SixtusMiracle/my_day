@@ -28,16 +28,19 @@ class Body extends StatelessWidget {
                   overrides: [taskNotifierProvider.overrideWithValue(data)],
                   child: Consumer(
                     builder: (context, ref, child) {
-                      final tasks =
+                      final allTasks =
                           ref.watch(taskNotifierProvider) as List<Task>;
+                      final undoneTasks = allTasks
+                          .where((Task task) => task.isDone == false)
+                          .toList();
 
                       return Expanded(
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
-                          itemCount: tasks.length,
+                          itemCount: undoneTasks.length,
                           itemBuilder: (BuildContext context, int index) =>
                               TaskCard(
-                            task: tasks[index],
+                            task: undoneTasks[index],
                             isMarkDoneScreen: true,
                           ),
                         ),

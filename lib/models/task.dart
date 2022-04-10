@@ -19,6 +19,7 @@ class Task {
         description: json["description"],
         icon: json["icon"],
         schedule: DateTime.fromMillisecondsSinceEpoch(json["schedule"]),
+        isDone: json["isDone"] == 0 ? false : true,
       );
 
   Map<String, dynamic> toMap() => {

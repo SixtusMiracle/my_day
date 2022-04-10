@@ -55,7 +55,7 @@ class MiBottomAppBar extends StatelessWidget {
                         blurRadius: 6,
                       ),
                     ],
-                    press: () {},
+                    press: () => Navigator.pop(context),
                     height: 90,
                     width: 90,
                     markDoneScreen: true,

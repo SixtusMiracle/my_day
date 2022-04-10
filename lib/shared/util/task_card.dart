@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:my_day/services/task_service.dart';
 
 import '../../models/task.dart';
+import '../../providers/task_notifier.dart';
 import '../constants.dart';
 import 'circular_gradient_icon.dart';
 import 'color_dot.dart';
@@ -77,32 +80,77 @@ class _TaskCardState extends State<TaskCard> {
             ),
           ),
           trailing: widget.isMarkDoneScreen
-              ? InkWell(
-                  onTap: () => setState(() => _isChecked = !_isChecked),
-                  child: Ink(
-                    width: miDefaultSize * 3,
-                    height: miDefaultSize * 3,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(miDefaultSize * 0.6),
-                      color: const Color(0xffffffff),
-                      border: Border.all(color: const Color(0x33181743)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0x1afe1e9a),
-                          offset: Offset(0, 2),
-                          blurRadius: 4,
-                        ),
-                      ],
-                    ),
-                    child: _isChecked
-                        ? Padding(
-                            padding: const EdgeInsets.all(miDefaultSize * 0.7),
-                            child: SvgPicture.asset(
-                              "assets/icons/selected.svg",
-                            ),
-                          )
-                        : null,
-                  ),
+              ? Consumer(
+                  builder: (context, outerRef, child) {
+                    final asyncTaskProvider =
+                        outerRef.watch(futureTaskNotifierProvider);
+
+                    return asyncTaskProvider.when(
+                      data: (data) {
+                        return ProviderScope(
+                          overrides: [
+                            taskNotifierProvider.overrideWithValue(data)
+                          ],
+                          child: Consumer(
+                            builder: (context, ref, child) {
+                              final tasksProvider =
+                                  ref.watch(taskNotifierProvider.notifier);
+
+                              return InkWell(
+                                onTap: () async {
+                                  setState(() => _isChecked = !_isChecked);
+
+                                  Future.delayed(Duration(milliseconds: 300),
+                                      () async {
+                                    TaskService _taskService = TaskService();
+
+                                    final result = await _taskService
+                                        .markTaskAsDone(widget.task.id);
+
+                                    if (result == "success") {
+                                      tasksProvider.refresh();
+                                    } else {
+                                      throw ("failed to update db");
+                                    }
+                                  });
+                                },
+                                child: Ink(
+                                  width: miDefaultSize * 3,
+                                  height: miDefaultSize * 3,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        miDefaultSize * 0.6),
+                                    color: const Color(0xffffffff),
+                                    border: Border.all(
+                                        color: const Color(0x33181743)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: const Color(0x1afe1e9a),
+                                        offset: Offset(0, 2),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: _isChecked
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(
+                                              miDefaultSize * 0.7),
+                                          child: SvgPicture.asset(
+                                            "assets/icons/selected.svg",
+                                          ),
+                                        )
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      error: (_, stack) => Center(child: Text(_.toString())),
+                      loading: () => const Center(
+                          child: CircularProgressIndicator.adaptive()),
+                    );
+                  },
                 )
               : Column(
                   children: [

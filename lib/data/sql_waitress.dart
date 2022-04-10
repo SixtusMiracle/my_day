@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:my_day/models/task.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -45,12 +44,10 @@ class SqlWaitress {
     return db.query("tasks", orderBy: "id DESC");
   }
 
-  static Future<int> updateTaskWhenItIsDone(int id) async {
+  static Future<void> updateTaskAsDone(int id) async {
     final db = await database();
 
-    final result =
-        await db.rawUpdate("UPDATE tasks SET isDone = 1, WHERE id = ?", [id]);
-    return result;
+    await db.rawUpdate("UPDATE tasks SET isDone = ? WHERE id = ?", [1, id]);
   }
 
   static Future<void> deleteTask(int id) async {

@@ -14,6 +14,8 @@ final taskNotifierProvider =
     StateNotifierProvider((ref) => TaskNotifier(tasks));
 
 class TaskNotifier extends StateNotifier<List<Task>> {
+  TaskService _taskService = TaskService();
+
   TaskNotifier(tasks) : super(tasks);
 
   addTask(Task newTask) {
@@ -28,5 +30,10 @@ class TaskNotifier extends StateNotifier<List<Task>> {
     state = state
         .where((Task task) => state.indexOf(task) != taskIndexToRemove)
         .toList();
+  }
+
+  refresh() async {
+    state = [];
+    state = await _taskService.getTasksFromDatabase();
   }
 }
