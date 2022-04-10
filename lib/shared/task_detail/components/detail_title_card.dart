@@ -44,7 +44,10 @@ class DetailTitleCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: miDefaultSize * 0.45),
-              child: Schedule(schedule: task.schedule),
+              child: Schedule(
+                schedule: task.schedule,
+                press: () {},
+              ),
             ),
           ],
         ),

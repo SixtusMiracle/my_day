@@ -7,9 +7,11 @@ class Schedule extends StatelessWidget {
   const Schedule({
     Key? key,
     required this.schedule,
+    this.press,
   }) : super(key: key);
 
   final DateTime schedule;
+  final Function()? press;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,16 @@ class Schedule extends StatelessWidget {
             fontSize: miDefaultSize * 1.2,
             color: miTextColor,
           ),
+        ),
+        SizedBox(width: miDefaultSize * 0.5),
+        TextButton.icon(
+          onPressed: press,
+          icon: Icon(
+            Icons.delete_forever_rounded,
+          ),
+          label: Text("Remove"),
+          style: TextButton.styleFrom(
+              primary: Colors.red, backgroundColor: Colors.white),
         ),
       ],
     );
