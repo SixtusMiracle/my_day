@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:my_day/models/task.dart';
 import 'package:my_day/screens/home/components/new_task/components/mi_form_label.dart';
 import 'package:my_day/screens/home/components/new_task/components/mi_form_text_area.dart';
+import 'package:my_day/services/task_service.dart';
 import 'package:my_day/shared/constants.dart';
 import 'package:my_day/shared/util/mi_button_primary.dart';
 
+import '../../../../providers/task_notifier.dart';
 import 'components/icons_row.dart';
 
 class MiNewTaskSidebar extends StatefulWidget {
@@ -208,22 +212,85 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                         ),
                       ),
                       SizedBox(height: miDefaultSize * 3),
-                      MiButtonPrimary(
-                        verticalSymmetricPadding: miDefaultSize * 0.5,
-                        text: "Add",
-                        press: () async {
-                          // validate new task form
-                          if (_newTaskFormKey.currentState!.validate()) {
-                            // merging selected date and time to form schedule
-                            final DateTime _schedule = DateTime(
-                              _selectedDate.year,
-                              _selectedDate.month,
-                              _selectedDate.day,
-                              _selectedTime.hour,
-                              _selectedTime.minute,
-                            );
-                            // TODO: submit form
-                          }
+                      Consumer(
+                        builder: (context, outerRef, child) {
+                          final asyncTaskProvider =
+                              outerRef.watch(futureTaskNotifierProvider);
+
+                          return asyncTaskProvider.when(
+                            data: (data) {
+                              return ProviderScope(
+                                overrides: [
+                                  taskNotifierProvider.overrideWithValue(data)
+                                ],
+                                child: Consumer(
+                                  builder: (context, ref, child) {
+                                    final tasks =
+                                        ref.watch(taskNotifierProvider)
+                                            as List<Task>;
+                                    final tasksProvider = ref
+                                        .watch(taskNotifierProvider.notifier);
+
+                                    return MiButtonPrimary(
+                                      verticalSymmetricPadding:
+                                          miDefaultSize * 0.5,
+                                      text: "Add",
+                                      press: () async {
+                                        // validate new task form
+                                        if (_newTaskFormKey.currentState!
+                                            .validate()) {
+                                          // merging selected date and time to form schedule
+                                          final DateTime _schedule = DateTime(
+                                            _selectedDate.year,
+                                            _selectedDate.month,
+                                            _selectedDate.day,
+                                            _selectedTime.hour,
+                                            _selectedTime.minute,
+                                          );
+
+                                          TaskService _taskService =
+                                              TaskService();
+
+                                          final Map<String, dynamic> newTask = {
+                                            "id": await _taskService
+                                                .getBiggestIdFromTasksInDatabase(),
+                                            "title": _title,
+                                            "description": _description,
+                                            "icon": _icon,
+                                            "schedule": _schedule
+                                                .millisecondsSinceEpoch,
+                                          };
+
+                                          dynamic result = await _taskService
+                                              .saveNewTask(newTask);
+
+                                          if (result != null) {
+                                            tasksProvider.addTask(Task(
+                                              id: newTask["id"],
+                                              title: newTask["title"],
+                                              description:
+                                                  newTask["description"],
+                                              icon: newTask["icon"],
+                                              schedule: DateTime
+                                                  .fromMillisecondsSinceEpoch(
+                                                      newTask["schedule"]),
+                                            ));
+                                            Navigator.pop(context);
+                                          } else {
+                                            print("failed to save");
+                                          }
+                                        }
+                                      },
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            error: (_, stack) =>
+                                Center(child: Text(_.toString())),
+                            loading: () => const Center(
+                                child: CircularProgressIndicator.adaptive()),
+                          );
                         },
                       ),
                     ],

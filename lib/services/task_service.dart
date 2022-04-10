@@ -18,4 +18,24 @@ class TaskService {
       rethrow;
     }
   }
+
+  Future<int> getBiggestIdFromTasksInDatabase() async {
+    try {
+      int response = await SqlWaitress.getBiggestIdFromTasks();
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<int> saveNewTask(Map<String, dynamic> newTask) async {
+    try {
+      int response = await SqlWaitress.createTask(newTask);
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

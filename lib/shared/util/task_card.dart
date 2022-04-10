@@ -78,7 +78,7 @@ class _TaskCardState extends State<TaskCard> {
           ),
           trailing: widget.isMarkDoneScreen
               ? InkWell(
-                  onTap: () => setState(() => _isChecked = true),
+                  onTap: () => setState(() => _isChecked = !_isChecked),
                   child: Ink(
                     width: miDefaultSize * 3,
                     height: miDefaultSize * 3,

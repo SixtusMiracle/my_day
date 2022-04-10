@@ -21,7 +21,7 @@ class MiBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       elevation: 0,
-      color: Colors.white.withOpacity(0.1),
+      color: Colors.white.withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.only(bottom: miDefaultSize * 1.2),
         child: Row(
