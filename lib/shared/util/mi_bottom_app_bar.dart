@@ -31,22 +31,6 @@ class MiBottomAppBar extends StatelessWidget {
           children: isMarkDoneScreen
               ? <Widget>[
                   CircularGradientIcon(
-                    icon: miIcons["times"],
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0x4d181743),
-                        offset: Offset(0, 3),
-                        blurRadius: 6,
-                      ),
-                    ],
-                    press: () => Navigator.pop(context),
-                    height: 90,
-                    width: 90,
-                    markDoneScreen: true,
-                    allPadding: miDefaultSize * 2.5,
-                  ),
-                  SizedBox(width: miDefaultSize * 1.5),
-                  CircularGradientIcon(
                     icon: miIcons["double_tick"],
                     boxShadow: [
                       BoxShadow(

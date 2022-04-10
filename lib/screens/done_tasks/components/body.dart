@@ -38,7 +38,7 @@ class Body extends StatelessWidget {
                           ? Padding(
                               padding: EdgeInsets.symmetric(
                                 horizontal: miDefaultSize,
-                                vertical: miDefaultSize * 20,
+                                vertical: miDefaultSize * 15,
                               ),
                               child: Text(
                                 "No done tasks yet...",

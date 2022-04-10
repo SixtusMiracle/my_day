@@ -100,19 +100,11 @@ class _TaskCardState extends State<TaskCard> {
                                 onTap: () async {
                                   setState(() => _isChecked = !_isChecked);
 
-                                  Future.delayed(Duration(milliseconds: 300),
-                                      () async {
-                                    TaskService _taskService = TaskService();
-
-                                    final result = await _taskService
-                                        .markTaskAsDone(widget.task.id);
-
-                                    if (result == "success") {
-                                      tasksProvider.refresh();
-                                    } else {
-                                      throw ("failed to update db");
-                                    }
-                                  });
+                                  if (_isChecked) {
+                                    await saveChanges(tasksProvider, true);
+                                  } else {
+                                    await saveChanges(tasksProvider, false);
+                                  }
                                 },
                                 child: Ink(
                                   width: miDefaultSize * 3,
@@ -175,5 +167,20 @@ class _TaskCardState extends State<TaskCard> {
         ),
       ),
     );
+  }
+
+  saveChanges(TaskNotifier tasksProvider, bool status) async {
+    Future.delayed(Duration(milliseconds: 50), () async {
+      TaskService _taskService = TaskService();
+
+      final result =
+          await _taskService.setTaskStatusInDatabase(widget.task.id, status);
+
+      if (result == "success") {
+        tasksProvider.updateTaskStatusInState(widget.task.id, status);
+      } else {
+        throw ("failed to update db");
+      }
+    });
   }
 }

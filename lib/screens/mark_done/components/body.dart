@@ -34,17 +34,34 @@ class Body extends StatelessWidget {
                           .where((Task task) => task.isDone == false)
                           .toList();
 
-                      return Expanded(
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: undoneTasks.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              TaskCard(
-                            task: undoneTasks[index],
-                            isMarkDoneScreen: true,
-                          ),
-                        ),
-                      );
+                      return undoneTasks.length == 0
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: miDefaultSize,
+                                vertical: miDefaultSize * 15,
+                              ),
+                              child: Text(
+                                "No tasks to mark as done yet...",
+                                style: TextStyle(
+                                  fontFamily: "Lato Black",
+                                  fontSize: miDefaultSize * 3,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: undoneTasks.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) =>
+                                        TaskCard(
+                                  key: ValueKey(undoneTasks[index].id),
+                                  task: undoneTasks[index],
+                                  isMarkDoneScreen: true,
+                                ),
+                              ),
+                            );
                     },
                   ),
                 ),

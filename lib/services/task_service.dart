@@ -49,9 +49,9 @@ class TaskService {
     }
   }
 
-  Future<String> markTaskAsDone(int id) async {
+  Future<String> setTaskStatusInDatabase(int id, bool isDone) async {
     try {
-      await SqlWaitress.updateTaskAsDone(id);
+      await SqlWaitress.updateTaskStatus(id, isDone);
 
       return "success";
     } catch (e) {

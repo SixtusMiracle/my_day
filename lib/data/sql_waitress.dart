@@ -44,10 +44,14 @@ class SqlWaitress {
     return db.query("tasks", orderBy: "id DESC");
   }
 
-  static Future<void> updateTaskAsDone(int id) async {
+  static Future<void> updateTaskStatus(int id, bool isDone) async {
     final db = await database();
 
-    await db.rawUpdate("UPDATE tasks SET isDone = ? WHERE id = ?", [1, id]);
+    if (isDone) {
+      await db.rawUpdate("UPDATE tasks SET isDone = ? WHERE id = ?", [1, id]);
+    } else {
+      await db.rawUpdate("UPDATE tasks SET isDone = ? WHERE id = ?", [0, id]);
+    }
   }
 
   static Future<void> deleteTask(int id) async {

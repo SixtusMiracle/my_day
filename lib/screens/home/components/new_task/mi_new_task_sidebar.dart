@@ -271,6 +271,7 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                                               schedule: DateTime
                                                   .fromMillisecondsSinceEpoch(
                                                       newTask["schedule"]),
+                                              isDone: false,
                                             ));
                                             Navigator.pop(context);
                                           } else {

@@ -10,7 +10,7 @@ class Task {
     required this.description,
     required this.icon,
     required this.schedule,
-    this.isDone = false,
+    required this.isDone,
   });
 
   factory Task.fromMap(Map<String, dynamic> json) => Task(
