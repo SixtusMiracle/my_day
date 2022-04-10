@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_day/services/task_service.dart';
 
 import '../../../../../models/task.dart';
 import '../../../../../shared/constants.dart';
 import '../../../../../shared/util/circular_gradient_icon.dart';
+import '../../../providers/task_notifier.dart';
 import 'schedule.dart';
 
 class DetailTitleCard extends StatelessWidget {
@@ -44,9 +47,48 @@ class DetailTitleCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: miDefaultSize * 0.45),
-              child: Schedule(
-                schedule: task.schedule,
-                press: () {},
+              child: Consumer(
+                builder: (context, outerRef, child) {
+                  final asyncTaskProvider =
+                      outerRef.watch(futureTaskNotifierProvider);
+
+                  return asyncTaskProvider.when(
+                    data: (data) {
+                      return ProviderScope(
+                        overrides: [
+                          taskNotifierProvider.overrideWithValue(data)
+                        ],
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            final tasksProvider =
+                                ref.watch(taskNotifierProvider.notifier);
+
+                            return Schedule(
+                              schedule: task.schedule,
+                              press: () async {
+                                TaskService _taskService = TaskService();
+                                int taskId = task.id;
+
+                                String result = await _taskService
+                                    .deleteTaskFromDatabase(taskId);
+
+                                if (result == "success") {
+                                  tasksProvider.removeTask(taskId);
+                                  Navigator.pop(context);
+                                } else {
+                                  throw ("failed to delete");
+                                }
+                              },
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    error: (_, stack) => Center(child: Text(_.toString())),
+                    loading: () => const Center(
+                        child: CircularProgressIndicator.adaptive()),
+                  );
+                },
               ),
             ),
           ],

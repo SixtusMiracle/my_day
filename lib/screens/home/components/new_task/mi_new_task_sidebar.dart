@@ -225,9 +225,6 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                                 ],
                                 child: Consumer(
                                   builder: (context, ref, child) {
-                                    final tasks =
-                                        ref.watch(taskNotifierProvider)
-                                            as List<Task>;
                                     final tasksProvider = ref
                                         .watch(taskNotifierProvider.notifier);
 
@@ -277,7 +274,7 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                                             ));
                                             Navigator.pop(context);
                                           } else {
-                                            print("failed to save");
+                                            throw ("failed to save");
                                           }
                                         }
                                       },

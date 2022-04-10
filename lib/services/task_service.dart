@@ -38,4 +38,14 @@ class TaskService {
       rethrow;
     }
   }
+
+  Future<String> deleteTaskFromDatabase(int id) async {
+    try {
+      await SqlWaitress.deleteTask(id);
+
+      return "success";
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

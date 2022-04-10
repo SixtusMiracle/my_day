@@ -22,4 +22,11 @@ class TaskNotifier extends StateNotifier<List<Task>> {
       ...state,
     ];
   }
+
+  removeTask(int id) {
+    final taskIndexToRemove = state.indexWhere((task) => task.id == id);
+    state = state
+        .where((task) => state.indexOf(task) != taskIndexToRemove)
+        .toList();
+  }
 }
