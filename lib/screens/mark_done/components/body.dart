@@ -45,6 +45,7 @@ class Body extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: "Lato Black",
                                   fontSize: miDefaultSize * 3,
+                                  color: Colors.purple,
                                 ),
                                 textAlign: TextAlign.center,
                               ),

@@ -43,6 +43,7 @@ class Body extends StatelessWidget {
                               child: Text(
                                 "No done tasks yet...",
                                 style: TextStyle(
+                                  color: Colors.purple,
                                   fontFamily: "Lato Black",
                                   fontSize: miDefaultSize * 3,
                                 ),

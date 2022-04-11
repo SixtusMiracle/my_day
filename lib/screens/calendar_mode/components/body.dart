@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/screens/calendar_mode/components/days_row.dart';
 
@@ -48,6 +49,12 @@ class _BodyState extends State<Body> {
     WidgetsBinding.instance!
         .addPostFrameCallback((_) => _scrollToSelectedIndex());
 
+    DateTime _selectedDateTime = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      days[selectedIndex],
+    );
+
     return Background(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,19 +84,63 @@ class _BodyState extends State<Body> {
                 overrides: [taskNotifierProvider.overrideWithValue(data)],
                 child: Consumer(
                   builder: (context, ref, child) {
-                    final tasks = ref.watch(taskNotifierProvider) as List<Task>;
+                    final allTasks =
+                        ref.watch(taskNotifierProvider) as List<Task>;
+                    final tasksForToday = allTasks
+                        .where((Task task) =>
+                            (task.schedule.month == DateTime.now().month) &&
+                            (task.schedule.day == days[selectedIndex]))
+                        .toList();
 
-                    return Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: tasks.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            TaskRow(
-                          task: tasks[index],
-                          tap: () => _showDetailsModal(task: tasks[index]),
-                        ),
-                      ),
-                    );
+                    return tasksForToday.length == 0
+                        ? Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: miDefaultSize,
+                              vertical: miDefaultSize * 9,
+                            ),
+                            child: Wrap(
+                              children: [
+                                Text(
+                                  "No tasks for",
+                                  style: TextStyle(
+                                    fontFamily: "Lato Black",
+                                    color: Colors.purple,
+                                    fontSize: miDefaultSize * 3,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(width: miDefaultSize * 0.8),
+                                Text(
+                                  DateTime(
+                                              DateTime.now().year,
+                                              DateTime.now().month,
+                                              DateTime.now().day) ==
+                                          _selectedDateTime
+                                      ? "today"
+                                      : DateFormat("E, MMM d")
+                                          .format(_selectedDateTime),
+                                  style: TextStyle(
+                                    fontFamily: "Lato Black",
+                                    color: Colors.purple,
+                                    fontSize: miDefaultSize * 3,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          )
+                        : Expanded(
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: tasksForToday.length,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  TaskRow(
+                                task: tasksForToday[index],
+                                tap: () => _showDetailsModal(
+                                    task: tasksForToday[index]),
+                              ),
+                            ),
+                          );
                   },
                 ),
               ),
