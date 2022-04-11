@@ -18,7 +18,6 @@ class NoItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: isHomeScreen
           ? [
-              SizedBox(height: miDefaultSize * 4),
               Text(
                 text,
                 style: TextStyle(

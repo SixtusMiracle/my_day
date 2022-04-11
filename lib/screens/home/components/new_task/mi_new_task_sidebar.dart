@@ -9,6 +9,7 @@ import 'package:my_day/shared/constants.dart';
 import 'package:my_day/shared/util/mi_button_primary.dart';
 
 import '../../../../providers/task_notifier.dart';
+import '../../../../shared/util/loading.dart';
 import 'components/icons_row.dart';
 
 class MiNewTaskSidebar extends StatefulWidget {
@@ -286,8 +287,7 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
                             },
                             error: (_, stack) =>
                                 Center(child: Text(_.toString())),
-                            loading: () => const Center(
-                                child: CircularProgressIndicator.adaptive()),
+                            loading: () => const Loading(),
                           );
                         },
                       ),

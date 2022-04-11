@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/shared/util/background.dart';
+import 'package:my_day/shared/util/loading.dart';
 
 import '../../../models/task.dart';
 import '../../../providers/task_notifier.dart';
@@ -54,8 +55,7 @@ class Body extends StatelessWidget {
                 error: (_, stack) => Center(
                   child: Text(_.toString()),
                 ),
-                loading: () =>
-                    const Center(child: CircularProgressIndicator.adaptive()),
+                loading: () => const Loading(),
               );
             }),
           ],

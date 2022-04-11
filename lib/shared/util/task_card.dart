@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:my_day/services/task_service.dart';
+import 'package:my_day/shared/util/loading.dart';
 
 import '../../models/task.dart';
 import '../../providers/task_notifier.dart';
@@ -139,8 +140,7 @@ class _TaskCardState extends State<TaskCard> {
                         );
                       },
                       error: (_, stack) => Center(child: Text(_.toString())),
-                      loading: () => const Center(
-                          child: CircularProgressIndicator.adaptive()),
+                      loading: () => const Loading(),
                     );
                   },
                 )

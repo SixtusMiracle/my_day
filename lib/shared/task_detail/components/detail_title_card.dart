@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/services/task_service.dart';
+import 'package:my_day/shared/util/loading.dart';
 
 import '../../../../../models/task.dart';
 import '../../../../../shared/constants.dart';
@@ -85,8 +86,7 @@ class DetailTitleCard extends StatelessWidget {
                       );
                     },
                     error: (_, stack) => Center(child: Text(_.toString())),
-                    loading: () => const Center(
-                        child: CircularProgressIndicator.adaptive()),
+                    loading: () => const Loading(),
                   );
                 },
               ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/providers/task_notifier.dart';
 import 'package:my_day/shared/util/background.dart';
+import 'package:my_day/shared/util/loading.dart';
 import 'package:my_day/shared/util/no_item.dart';
 import 'package:my_day/shared/util/task_card.dart';
 
@@ -54,8 +55,7 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 error: (_, stack) => Center(child: Text(_.toString())),
-                loading: () =>
-                    const Center(child: CircularProgressIndicator.adaptive()),
+                loading: () => const Loading(),
               );
             }),
           ],

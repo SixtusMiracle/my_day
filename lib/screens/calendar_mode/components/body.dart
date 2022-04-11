@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/screens/calendar_mode/components/days_row.dart';
+import 'package:my_day/shared/util/loading.dart';
 
 import '../../../providers/task_notifier.dart';
 import '../../../shared/constants.dart';
@@ -147,8 +148,7 @@ class _BodyState extends State<Body> {
               error: (_, stack) => Center(
                 child: Text(_.toString()),
               ),
-              loading: () =>
-                  const Center(child: CircularProgressIndicator.adaptive()),
+              loading: () => const Loading(),
             );
           }),
         ],
