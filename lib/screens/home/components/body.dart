@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/providers/task_notifier.dart';
 import 'package:my_day/shared/constants.dart';
+import 'package:my_day/shared/util/no_item.dart';
 
 import '../../../shared/task_detail/details_modal_dialog.dart';
 import '../../../shared/util/background.dart';
@@ -43,17 +44,23 @@ class Body extends StatelessWidget {
                           final tasks =
                               ref.watch(taskNotifierProvider) as List<Task>;
 
-                          return Expanded(
-                            child: ListView.builder(
-                              physics: BouncingScrollPhysics(),
-                              itemCount: tasks.length,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  TaskCard(
-                                      task: tasks[index],
-                                      press: () => _showDetailsModal(
-                                          task: tasks[index])),
-                            ),
-                          );
+                          return tasks.length == 0
+                              ? NoItem(
+                                  text:
+                                      "No tasks! Tap on the plus icon on the lower right part of the screen to add a new task",
+                                  isHomeScreen: true)
+                              : Expanded(
+                                  child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    itemCount: tasks.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) =>
+                                            TaskCard(
+                                                task: tasks[index],
+                                                press: () => _showDetailsModal(
+                                                    task: tasks[index])),
+                                  ),
+                                );
                         },
                       ),
                     );

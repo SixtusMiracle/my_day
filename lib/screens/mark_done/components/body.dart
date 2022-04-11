@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/providers/task_notifier.dart';
 import 'package:my_day/shared/util/background.dart';
+import 'package:my_day/shared/util/no_item.dart';
 import 'package:my_day/shared/util/task_card.dart';
 
 import '../../../shared/constants.dart';
@@ -35,21 +36,7 @@ class Body extends StatelessWidget {
                           .toList();
 
                       return undoneTasks.length == 0
-                          ? Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: miDefaultSize,
-                                vertical: miDefaultSize * 15,
-                              ),
-                              child: Text(
-                                "No tasks to mark as done yet...",
-                                style: TextStyle(
-                                  fontFamily: "Lato Black",
-                                  fontSize: miDefaultSize * 3,
-                                  color: Colors.purple,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+                          ? NoItem(text: "No tasks to mark as done yet...")
                           : Expanded(
                               child: ListView.builder(
                                 physics: BouncingScrollPhysics(),

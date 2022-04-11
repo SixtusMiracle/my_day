@@ -14,6 +14,7 @@ class MarkDone extends StatelessWidget {
         context: context,
         hasActions: false,
         title: "MARK DONE TASKS",
+        hasBackButton: true,
       ),
       body: Body(),
       extendBody: true,

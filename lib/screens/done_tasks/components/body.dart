@@ -5,6 +5,7 @@ import 'package:my_day/shared/util/background.dart';
 import '../../../models/task.dart';
 import '../../../providers/task_notifier.dart';
 import '../../../shared/constants.dart';
+import '../../../shared/util/no_item.dart';
 import '../../../shared/util/task_card.dart';
 
 class Body extends StatelessWidget {
@@ -35,21 +36,7 @@ class Body extends StatelessWidget {
                           .toList();
 
                       return tasks.length == 0
-                          ? Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: miDefaultSize,
-                                vertical: miDefaultSize * 15,
-                              ),
-                              child: Text(
-                                "No done tasks yet...",
-                                style: TextStyle(
-                                  color: Colors.purple,
-                                  fontFamily: "Lato Black",
-                                  fontSize: miDefaultSize * 3,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            )
+                          ? NoItem(text: "No done tasks yet...")
                           : Expanded(
                               child: ListView.builder(
                                 physics: BouncingScrollPhysics(),
