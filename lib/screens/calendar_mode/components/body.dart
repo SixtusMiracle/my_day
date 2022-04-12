@@ -93,7 +93,7 @@ class _BodyState extends State<Body> {
                             (task.schedule.day == days[selectedIndex]))
                         .toList();
 
-                    return tasksForToday.length == 0
+                    return tasksForToday.isEmpty
                         ? Padding(
                             padding: EdgeInsets.symmetric(
                               horizontal: miDefaultSize,

@@ -45,7 +45,7 @@ class Body extends StatelessWidget {
                           final tasks =
                               ref.watch(taskNotifierProvider) as List<Task>;
 
-                          return tasks.length == 0
+                          return tasks.isEmpty
                               ? NoItem(
                                   text:
                                       "No tasks! Tap on the plus icon on the lower right part of the screen to add a new task",

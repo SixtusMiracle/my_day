@@ -36,7 +36,7 @@ class Body extends StatelessWidget {
                           .where((Task task) => task.isDone == true)
                           .toList();
 
-                      return tasks.length == 0
+                      return tasks.isEmpty
                           ? NoItem(text: "No done tasks yet...")
                           : Expanded(
                               child: ListView.builder(
