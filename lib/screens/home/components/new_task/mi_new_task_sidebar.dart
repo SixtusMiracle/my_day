@@ -94,210 +94,214 @@ class _MiNewTaskSidebarState extends State<MiNewTaskSidebar> {
 
     return Material(
       type: MaterialType.transparency,
-      child: Container(
-        height: size.height,
-        width: size.width * 0.8,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(miDefaultSize * 1.3),
-            bottomLeft: Radius.circular(miDefaultSize * 1.3),
-          ),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x33181743),
-              offset: Offset(0, 4),
-              blurRadius: 8,
-              blurStyle: BlurStyle.outer,
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
+        child: Container(
+          height: size.height,
+          width: size.width * 0.8,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(miDefaultSize * 1.3),
+              bottomLeft: Radius.circular(miDefaultSize * 1.3),
             ),
-          ],
-        ),
-        child: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: miDefaultSize * 1.5,
-            vertical: miDefaultSize * 0.01,
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x33181743),
+                offset: Offset(0, 4),
+                blurRadius: 8,
+                blurStyle: BlurStyle.outer,
+              ),
+            ],
           ),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "NEW TASK",
-                  style: TextStyle(
-                    fontFamily: "Baloo",
-                    color: miTextColor,
-                    fontSize: miDefaultSize * 2.4,
+          child: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: miDefaultSize * 1.5,
+              vertical: miDefaultSize * 0.01,
+            ),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "NEW TASK",
+                    style: TextStyle(
+                      fontFamily: "Baloo",
+                      color: miTextColor,
+                      fontSize: miDefaultSize * 2.4,
+                    ),
                   ),
-                ),
-                SizedBox(height: miDefaultSize),
-                Form(
-                  key: _newTaskFormKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: miDefaultSize),
-                        child: MiFormLabel(text: "Icon"),
-                      ),
-                      SizedBox(
-                        height: miDefaultSize * 5.5,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: icons.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              IconsRow(
-                            index: index,
-                            selectedIndex: selectedIndex,
-                            icons: icons,
-                            tap: () {
-                              setState(() {
-                                selectedIndex = index;
-                                _icon = icons[index];
-                              });
-                            },
+                  SizedBox(height: miDefaultSize),
+                  Form(
+                    key: _newTaskFormKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: miDefaultSize),
+                          child: MiFormLabel(text: "Icon"),
+                        ),
+                        SizedBox(
+                          height: miDefaultSize * 5.5,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: icons.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                IconsRow(
+                              index: index,
+                              selectedIndex: selectedIndex,
+                              icons: icons,
+                              tap: () {
+                                setState(() {
+                                  selectedIndex = index;
+                                  _icon = icons[index];
+                                });
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: miDefaultSize * 1.3),
-                      MiFormLabel(text: "Name"),
-                      TextFormField(
-                        validator: (val) =>
-                            val!.isEmpty ? "Please enter task name" : null,
-                        onChanged: (val) => setState(() => _title = val),
-                        style: TextStyle(
-                          fontSize: miDefaultSize * 1.5,
-                          color: miTextColor,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: "Enter task name",
-                          errorStyle: TextStyle(fontStyle: FontStyle.italic),
-                        ),
-                      ),
-                      SizedBox(height: miDefaultSize * 2),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: miDefaultSize),
-                        child: MiFormLabel(text: "Description"),
-                      ),
-                      MiFormTextArea(
-                        changed: (val) => setState(() => _description = val),
-                      ),
-                      SizedBox(height: miDefaultSize * 2),
-                      MiFormLabel(text: "Date"),
-                      GestureDetector(
-                        onTap: () => _selectDate(context),
-                        child: TextFormField(
+                        SizedBox(height: miDefaultSize * 1.3),
+                        MiFormLabel(text: "Name"),
+                        TextFormField(
+                          validator: (val) =>
+                              val!.isEmpty ? "Please enter task name" : null,
+                          onChanged: (val) => setState(() => _title = val),
                           style: TextStyle(
                             fontSize: miDefaultSize * 1.5,
                             color: miTextColor,
                           ),
-                          enabled: false,
-                          keyboardType: TextInputType.text,
-                          controller: _dateController,
-                        ),
-                      ),
-                      SizedBox(height: miDefaultSize * 2),
-                      MiFormLabel(text: "Time"),
-                      GestureDetector(
-                        onTap: () => _selectTime(context),
-                        child: TextFormField(
-                          style: TextStyle(
-                            fontSize: miDefaultSize * 1.5,
-                            color: miTextColor,
+                          decoration: InputDecoration(
+                            hintText: "Enter task name",
+                            errorStyle: TextStyle(fontStyle: FontStyle.italic),
                           ),
-                          enabled: false,
-                          keyboardType: TextInputType.text,
-                          controller: _timeController,
                         ),
-                      ),
-                      SizedBox(height: miDefaultSize * 3),
-                      Consumer(
-                        builder: (context, outerRef, child) {
-                          final asyncTaskProvider =
-                              outerRef.watch(futureTaskNotifierProvider);
+                        SizedBox(height: miDefaultSize * 2),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: miDefaultSize),
+                          child: MiFormLabel(text: "Description"),
+                        ),
+                        MiFormTextArea(
+                          changed: (val) => setState(() => _description = val),
+                        ),
+                        SizedBox(height: miDefaultSize * 2),
+                        MiFormLabel(text: "Date"),
+                        GestureDetector(
+                          onTap: () => _selectDate(context),
+                          child: TextFormField(
+                            style: TextStyle(
+                              fontSize: miDefaultSize * 1.5,
+                              color: miTextColor,
+                            ),
+                            enabled: false,
+                            keyboardType: TextInputType.text,
+                            controller: _dateController,
+                          ),
+                        ),
+                        SizedBox(height: miDefaultSize * 2),
+                        MiFormLabel(text: "Time"),
+                        GestureDetector(
+                          onTap: () => _selectTime(context),
+                          child: TextFormField(
+                            style: TextStyle(
+                              fontSize: miDefaultSize * 1.5,
+                              color: miTextColor,
+                            ),
+                            enabled: false,
+                            keyboardType: TextInputType.text,
+                            controller: _timeController,
+                          ),
+                        ),
+                        SizedBox(height: miDefaultSize * 3),
+                        Consumer(
+                          builder: (context, outerRef, child) {
+                            final asyncTaskProvider =
+                                outerRef.watch(futureTaskNotifierProvider);
 
-                          return asyncTaskProvider.when(
-                            data: (data) {
-                              return ProviderScope(
-                                overrides: [
-                                  taskNotifierProvider.overrideWithValue(data)
-                                ],
-                                child: Consumer(
-                                  builder: (context, ref, child) {
-                                    final tasksProvider = ref
-                                        .watch(taskNotifierProvider.notifier);
+                            return asyncTaskProvider.when(
+                              data: (data) {
+                                return ProviderScope(
+                                  overrides: [
+                                    taskNotifierProvider.overrideWithValue(data)
+                                  ],
+                                  child: Consumer(
+                                    builder: (context, ref, child) {
+                                      final tasksProvider = ref
+                                          .watch(taskNotifierProvider.notifier);
 
-                                    return MiButtonPrimary(
-                                      verticalSymmetricPadding:
-                                          miDefaultSize * 0.5,
-                                      text: "Add",
-                                      press: () async {
-                                        // validate new task form
-                                        if (_newTaskFormKey.currentState!
-                                            .validate()) {
-                                          // merging selected date and time to form schedule
-                                          final DateTime _schedule = DateTime(
-                                            _selectedDate.year,
-                                            _selectedDate.month,
-                                            _selectedDate.day,
-                                            _selectedTime.hour,
-                                            _selectedTime.minute,
-                                          );
+                                      return MiButtonPrimary(
+                                        verticalSymmetricPadding:
+                                            miDefaultSize * 0.5,
+                                        text: "Add",
+                                        press: () async {
+                                          // validate new task form
+                                          if (_newTaskFormKey.currentState!
+                                              .validate()) {
+                                            // merging selected date and time to form schedule
+                                            final DateTime _schedule = DateTime(
+                                              _selectedDate.year,
+                                              _selectedDate.month,
+                                              _selectedDate.day,
+                                              _selectedTime.hour,
+                                              _selectedTime.minute,
+                                            );
 
-                                          TaskService _taskService =
-                                              TaskService();
+                                            TaskService _taskService =
+                                                TaskService();
 
-                                          final Map<String, dynamic> newTask = {
-                                            "id": await _taskService
-                                                .getBiggestIdFromTasksInDatabase(),
-                                            "title": _title,
-                                            "description": _description,
-                                            "icon": _icon,
-                                            "schedule": _schedule
-                                                .millisecondsSinceEpoch,
-                                          };
+                                            final Map<String, dynamic> newTask =
+                                                {
+                                              "id": await _taskService
+                                                  .getBiggestIdFromTasksInDatabase(),
+                                              "title": _title,
+                                              "description": _description,
+                                              "icon": _icon,
+                                              "schedule": _schedule
+                                                  .millisecondsSinceEpoch,
+                                            };
 
-                                          dynamic result = await _taskService
-                                              .saveNewTask(newTask);
+                                            dynamic result = await _taskService
+                                                .saveNewTask(newTask);
 
-                                          if (result != null) {
-                                            tasksProvider.addTask(Task(
-                                              id: newTask["id"],
-                                              title: newTask["title"],
-                                              description:
-                                                  newTask["description"],
-                                              icon: newTask["icon"],
-                                              schedule: DateTime
-                                                  .fromMillisecondsSinceEpoch(
-                                                      newTask["schedule"]),
-                                              isDone: false,
-                                            ));
-                                            Navigator.pop(context);
-                                          } else {
-                                            throw ("failed to save");
+                                            if (result != null) {
+                                              tasksProvider.addTask(Task(
+                                                id: newTask["id"],
+                                                title: newTask["title"],
+                                                description:
+                                                    newTask["description"],
+                                                icon: newTask["icon"],
+                                                schedule: DateTime
+                                                    .fromMillisecondsSinceEpoch(
+                                                        newTask["schedule"]),
+                                                isDone: false,
+                                              ));
+                                              Navigator.pop(context);
+                                            } else {
+                                              throw ("failed to save");
+                                            }
                                           }
-                                        }
-                                      },
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            error: (_, stack) =>
-                                Center(child: Text(_.toString())),
-                            loading: () => const Loading(),
-                          );
-                        },
-                      ),
-                    ],
+                                        },
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              error: (_, stack) =>
+                                  Center(child: Text(_.toString())),
+                              loading: () => const Loading(),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        )),
+          )),
+        ),
       ),
     );
   }
