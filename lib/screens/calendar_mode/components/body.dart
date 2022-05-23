@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:my_day/models/task.dart';
 import 'package:my_day/screens/calendar_mode/components/days_row.dart';
 import 'package:my_day/shared/util/loading.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../../providers/task_notifier.dart';
 import '../../../shared/constants.dart';
@@ -23,9 +24,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  ScrollController _datesController = ScrollController();
-  List<int> days = List<int>.generate(totalDaysInMonth, (i) => i + 1);
-  int selectedIndex = DateTime.now().day - 1;
+  final dateScrollController = ItemScrollController();
+  List<int> days = [];
+  int selectedIndex = 0;
 
   Future<void> _showDetailsModal({required Task task}) {
     return showDialog<void>(
@@ -34,21 +35,25 @@ class _BodyState extends State<Body> {
     );
   }
 
-  void _scrollToSelectedIndex() {
-    double initialScrollTarget = (selectedIndex * (miDefaultSize * 8));
+  void _scrollToSelectedIndex({required int index}) {
+    dateScrollController.scrollTo(
+      index: index,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.elasticOut,
+    );
+  }
 
-    if (_datesController.hasClients) {
-      _datesController.animateTo(initialScrollTarget,
-          duration: Duration(milliseconds: 300), curve: Curves.elasticOut);
-    } else {
-      Timer(Duration(milliseconds: 400), () => _scrollToSelectedIndex());
-    }
+  @override
+  void initState() {
+    super.initState();
+    days = List<int>.generate(totalDaysInMonth, (i) => i + 1);
+    selectedIndex = days.indexWhere((day) => day == DateTime.now().day);
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!
-        .addPostFrameCallback((_) => _scrollToSelectedIndex());
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _scrollToSelectedIndex(index: selectedIndex));
 
     DateTime _selectedDateTime = DateTime(
       DateTime.now().year,
@@ -62,10 +67,10 @@ class _BodyState extends State<Body> {
         children: [
           SizedBox(
             height: miDefaultSize * 8,
-            child: ListView.builder(
-              controller: _datesController,
+            child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
+              itemScrollController: dateScrollController,
               itemCount: days.length,
               itemBuilder: (BuildContext context, int index) => DaysRow(
                 index: index,
@@ -75,7 +80,7 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          SizedBox(height: miDefaultSize * 1.7),
+          const SizedBox(height: miDefaultSize * 1.7),
           Consumer(builder: (context, outerRef, child) {
             final asyncTaskProvider =
                 outerRef.watch(futureTaskNotifierProvider);
