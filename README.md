@@ -17,8 +17,8 @@ An awesome app to help you manage your day.
 Created by [Sixtus Miracle](https://github.com/sixtusmiracle)
 
 ## Credits
-Many thanks to [Javier Oliver](https://dribbble.com/JAVIER88) for the ui that inspired this work.
+Many thanks to [Javier Oliver](https://dribbble.com/JAVIER88) for the adobe xd ui that inspired this work.
 
 ## Donate
 
-You can support me via [PayPal](https://paypal.me/mirolicmiralo)
+You can support me via [Barter](https://barter.me/sixtusagbo)
