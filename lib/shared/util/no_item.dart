@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class NoItem extends StatelessWidget {
+  /// This widget displays a custom message
+  /// when a collection is empty.
+
   const NoItem({
     Key? key,
     required this.text,

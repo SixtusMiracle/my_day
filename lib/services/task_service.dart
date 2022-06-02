@@ -2,6 +2,9 @@ import 'package:my_day/data/sql_waitress.dart';
 import 'package:my_day/models/task.dart';
 
 class TaskService {
+  /// Interacts with the [SqlWaitress]
+  TaskService();
+
   List<Task> taskList = [];
 
   Future<List<Task>> getTasksFromDatabase() async {

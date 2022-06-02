@@ -7,6 +7,9 @@ import '../../../shared/constants.dart';
 import '../../../shared/util/circular_gradient_icon.dart';
 
 class TaskRow extends StatelessWidget {
+  /// This widget displays a particular task
+  /// in calendar mode with mini-details
+
   const TaskRow({Key? key, required this.task, this.tap}) : super(key: key);
 
   final Task task;

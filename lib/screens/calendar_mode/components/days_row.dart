@@ -4,6 +4,8 @@ import '../../../../../shared/constants.dart';
 import 'day_box.dart';
 
 class DaysRow extends StatelessWidget {
+  /// This widget displays a [days] carousel
+
   const DaysRow({
     Key? key,
     required this.index,
@@ -13,6 +15,8 @@ class DaysRow extends StatelessWidget {
   }) : super(key: key);
 
   final int index, selectedIndex;
+
+  /// [List] of all the days in a particular month
   final List<int> days;
   final Function()? tap;
 

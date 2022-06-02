@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import '../../../../../shared/constants.dart';
 
 class Schedule extends StatelessWidget {
+  /// This widget displays the formatted [schedule]
+  /// in a human-readable way.
+
   const Schedule({
     Key? key,
     required this.schedule,

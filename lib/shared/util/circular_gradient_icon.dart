@@ -5,17 +5,14 @@ import 'package:my_day/models/mi_icon.dart';
 import '../constants.dart';
 
 class CircularGradientIcon extends StatelessWidget {
-  final MiIcon? icon;
-  final double height, width;
-  final List<BoxShadow>? boxShadow;
-  final Color? color;
-  final Function()? press;
-  final bool isActive, markDoneScreen;
-  final double allPadding;
+  /// Generates a custom circular icon.
+  ///
+  /// The circular icon is generated using a [Container]
+  /// and made clickable by wrapping it with a [GestureDetector].
 
   const CircularGradientIcon({
     Key? key,
-    required this.icon,
+    this.icon,
     this.height = 55,
     this.width = 55,
     this.boxShadow,
@@ -25,6 +22,15 @@ class CircularGradientIcon extends StatelessWidget {
     this.markDoneScreen = false,
     this.allPadding = miDefaultSize * 1.15,
   }) : super(key: key);
+
+  /// The icon data passed to the widget as [MiIcon]
+  final MiIcon? icon;
+  final double height, width;
+  final List<BoxShadow>? boxShadow;
+  final Color? color;
+  final Function()? press;
+  final bool isActive, markDoneScreen;
+  final double allPadding;
 
   @override
   Widget build(BuildContext context) {

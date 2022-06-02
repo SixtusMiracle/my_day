@@ -5,6 +5,8 @@ import '../../../../../shared/util/circular_gradient_icon.dart';
 import '../../../../../shared/util/color_dot.dart';
 
 class IconsRow extends StatelessWidget {
+  /// This widget is the icons carousel
+
   const IconsRow({
     Key? key,
     required this.index,

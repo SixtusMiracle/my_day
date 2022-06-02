@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../shared/constants.dart';
 
 class MiContentBox extends StatelessWidget {
+  /// This widget displays the [description]
+
   const MiContentBox({
     Key? key,
     required this.description,

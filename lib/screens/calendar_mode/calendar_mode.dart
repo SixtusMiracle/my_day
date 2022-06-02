@@ -6,6 +6,9 @@ import '../../shared/util/mi_bottom_app_bar.dart';
 import 'components/body.dart';
 
 class CalendarMode extends StatelessWidget {
+  /// This widget is a calendar mode
+  /// version of the home screen
+
   const CalendarMode({Key? key}) : super(key: key);
 
   @override

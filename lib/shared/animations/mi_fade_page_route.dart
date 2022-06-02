@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MiFadePageRoute extends PageRouteBuilder {
-  final Widget page;
+  /// Applies a fade animation
+  /// when naviating to a new screen.
 
   MiFadePageRoute({required this.page})
       : super(
@@ -19,4 +20,6 @@ class MiFadePageRoute extends PageRouteBuilder {
           ) =>
               FadeTransition(opacity: animation, child: child),
         );
+
+  final Widget page;
 }

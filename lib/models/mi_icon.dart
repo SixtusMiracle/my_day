@@ -1,8 +1,5 @@
 class MiIcon {
-  final String iconPath;
-  final int? colorCode;
-  final int gradientStartColor, gradientStopColor;
-  final double beginStart, beginStop, endStart, endStop;
+  /// Holds data for an icon
 
   MiIcon({
     required this.iconPath,
@@ -14,4 +11,9 @@ class MiIcon {
     required this.endStart,
     required this.endStop,
   });
+
+  final String iconPath;
+  final int? colorCode;
+  final int gradientStartColor, gradientStopColor;
+  final double beginStart, beginStop, endStart, endStop;
 }

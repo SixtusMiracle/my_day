@@ -17,6 +17,25 @@ class MiBottomAppBar extends StatelessWidget {
 
   final bool isMarkDoneScreen, isCalendarMode;
 
+  /// Generates new task sidebar
+  Future<Object?> buildSideBar(BuildContext context) {
+    return showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Label',
+      pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+      ) {
+        return Align(
+          alignment: Alignment.centerRight,
+          child: MiNewTaskSidebar(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -107,21 +126,7 @@ class MiBottomAppBar extends StatelessWidget {
                       ),
                     ],
                     press: () {
-                      showGeneralDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        barrierLabel: 'Label',
-                        pageBuilder: (
-                          BuildContext context,
-                          Animation<double> animation,
-                          Animation<double> secondaryAnimation,
-                        ) {
-                          return Align(
-                            alignment: Alignment.centerRight,
-                            child: MiNewTaskSidebar(),
-                          );
-                        },
-                      );
+                      buildSideBar(context);
                     },
                   ),
                 ],

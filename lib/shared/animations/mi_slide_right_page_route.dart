@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MiSlideRightPageRoute extends PageRouteBuilder {
-  final Widget page;
+  /// Applies a right slide animation
+  /// when naviating to a new screen.
 
   MiSlideRightPageRoute({required this.page})
       : super(
@@ -25,4 +26,6 @@ class MiSlideRightPageRoute extends PageRouteBuilder {
             child: child,
           ),
         );
+
+  final Widget page;
 }

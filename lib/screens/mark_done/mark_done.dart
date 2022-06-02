@@ -5,6 +5,8 @@ import '../../shared/util/mi_bottom_app_bar.dart';
 import 'components/body.dart';
 
 class MarkDone extends StatelessWidget {
+  /// This is where the users can
+  /// mark done tasks from
   const MarkDone({Key? key}) : super(key: key);
 
   @override

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MiSlideLeftPageRoute extends PageRouteBuilder {
-  final Widget page;
+  /// Applies a left slide animation
+  /// when naviating to a new screen.
 
   MiSlideLeftPageRoute({required this.page})
       : super(
@@ -25,4 +26,6 @@ class MiSlideLeftPageRoute extends PageRouteBuilder {
             child: child,
           ),
         );
+
+  final Widget page;
 }

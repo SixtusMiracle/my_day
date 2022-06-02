@@ -6,6 +6,7 @@ import 'package:my_day/shared/routes.dart';
 void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
+  /// This widget is the root of my app.
   const MyApp({Key? key}) : super(key: key);
 
   @override

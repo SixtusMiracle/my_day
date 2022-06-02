@@ -12,9 +12,8 @@ import 'circular_gradient_icon.dart';
 import 'color_dot.dart';
 
 class TaskCard extends StatefulWidget {
-  final Task task;
-  final Function()? press;
-  final bool isDoneScreen, isMarkDoneScreen;
+  /// This widget displays a [Task]
+  /// with mini-details.
 
   const TaskCard({
     Key? key,
@@ -23,6 +22,10 @@ class TaskCard extends StatefulWidget {
     this.isDoneScreen = false,
     this.isMarkDoneScreen = false,
   }) : super(key: key);
+
+  final Task task;
+  final Function()? press;
+  final bool isDoneScreen, isMarkDoneScreen;
 
   @override
   State<TaskCard> createState() => _TaskCardState();

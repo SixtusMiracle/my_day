@@ -4,6 +4,10 @@ import 'package:my_day/services/task_service.dart';
 
 List<Task> tasks = [];
 
+/// An async provider
+///
+/// It fetches [List] of [Task] from database
+/// using the [TaskService]
 final futureTaskNotifierProvider = FutureProvider((ref) async {
   final TaskService _taskService = TaskService();
   final tasks = await _taskService.getTasksFromDatabase();
@@ -14,6 +18,9 @@ final taskNotifierProvider =
     StateNotifierProvider((ref) => TaskNotifier(tasks));
 
 class TaskNotifier extends StateNotifier<List<Task>> {
+  /// Riverpod provider that handles state management
+  ///
+  /// The state managed here is the [List] of [Task]
   TaskNotifier(tasks) : super(tasks);
 
   addTask(Task newTask) {

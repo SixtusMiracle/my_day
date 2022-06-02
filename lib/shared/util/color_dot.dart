@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class ColorDot extends StatelessWidget {
-  final Color color;
+  /// Generates a dot
+  ///
+  /// [Color] **color** *required*
 
   const ColorDot({
     Key? key,
     required this.color,
   }) : super(key: key);
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {

@@ -7,12 +7,17 @@ import '../../../../shared/util/mi_button_primary.dart';
 import 'components/mi_content_box.dart';
 
 class DetailsModalDialog extends StatelessWidget {
-  final Task task;
+  /// This widget displays a [Task]
+  /// with full details
+  ///
+  /// [Task] **task** *required*
 
   const DetailsModalDialog({
     Key? key,
     required this.task,
   }) : super(key: key);
+
+  final Task task;
 
   @override
   Widget build(BuildContext context) {

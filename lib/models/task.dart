@@ -1,8 +1,5 @@
 class Task {
-  final int id;
-  final String icon, title, description;
-  final DateTime schedule;
-  final bool isDone;
+  /// Holds data for a particular task
 
   Task({
     required this.id,
@@ -13,6 +10,11 @@ class Task {
     required this.isDone,
   });
 
+  final int id;
+  final String icon, title, description;
+  final DateTime schedule;
+  final bool isDone;
+
   factory Task.fromMap(Map<String, dynamic> json) => Task(
         id: json["id"],
         title: json["title"],
@@ -21,15 +23,6 @@ class Task {
         schedule: DateTime.fromMillisecondsSinceEpoch(json["schedule"]),
         isDone: json["isDone"] == 0 ? false : true,
       );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "title": title,
-        "description": description,
-        "icon": icon,
-        "schedule": schedule,
-        "isDone": isDone,
-      };
 
   @override
   String toString() {

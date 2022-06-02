@@ -13,6 +13,9 @@ import '../../../../shared/util/loading.dart';
 import 'components/icons_row.dart';
 
 class MiNewTaskSidebar extends StatefulWidget {
+  /// This widget is the sidebar
+  /// for a new task
+
   const MiNewTaskSidebar({
     Key? key,
   }) : super(key: key);

@@ -4,6 +4,9 @@ import 'package:intl/intl.dart';
 import '../../../shared/constants.dart';
 
 class DayBox extends StatelessWidget {
+  /// This widget displays a particular day
+  /// from the [List] of [days]
+
   const DayBox({
     Key? key,
     required this.days,
@@ -27,7 +30,7 @@ class DayBox extends StatelessWidget {
             color: selectedIndex == index ? Colors.white : miTextColor,
           ),
         ),
-        SizedBox(height: miDefaultSize * 0.7),
+        const SizedBox(height: miDefaultSize * 0.7),
         Text(
           DateFormat("E").format(
               DateTime(DateTime.now().year, DateTime.now().month, days[index])),

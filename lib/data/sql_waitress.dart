@@ -4,6 +4,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqlWaitress {
+  // Interacts with the [Database]
+  SqlWaitress();
+
   static Future<void> createTables(Database database) async {
     await database.execute('''CREATE TABLE tasks(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
